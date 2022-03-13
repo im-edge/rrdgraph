@@ -23,39 +23,39 @@ class RrdGraphData
         $filename = Render::string($filename);
         $quotedDs = Render::string($ds);
         $def = "$filename:$quotedDs:$cf";
-        if (isset($this->defs[$def])) {
-            return $this->defs[$def];
+        if (isset($this->dataDefinitions[$def])) {
+            return $this->dataDefinitions[$def];
         }
         $alias = $this->getUniqueAlias('def_' . strtolower($cf) . '_' . $ds);
-        $this->defs[$def] = $alias;
+        $this->dataDefinitions[$def] = $alias;
 
         return $alias;
     }
 
     public function cdef($expression, $preferredAlias = null): string
     {
-        if (isset($this->cdefs[$expression])) {
-            return $this->cdefs[$expression];
+        if (isset($this->dataCalculations[$expression])) {
+            return $this->dataCalculations[$expression];
         }
         if ($preferredAlias === null) {
             $preferredAlias = 'cdef__1';
         }
         $alias = $this->getUniqueAlias($preferredAlias);
-        $this->cdefs[$expression] = $alias;
+        $this->dataCalculations[$expression] = $alias;
 
         return $alias;
     }
 
     public function vdef($expression, $preferredAlias = null): string
     {
-        if (isset($this->vdefs[$expression])) {
-            return $this->vdefs[$expression];
+        if (isset($this->variableDefinitions[$expression])) {
+            return $this->variableDefinitions[$expression];
         }
         if ($preferredAlias === null) {
             $preferredAlias = 'vdef__1';
         }
         $alias = $this->getUniqueAlias($preferredAlias);
-        $this->vdefs[$expression] = $alias;
+        $this->variableDefinitions[$expression] = $alias;
 
         return $alias;
     }
@@ -80,22 +80,22 @@ class RrdGraphData
         }
     }
 
-    public function getInstructions()
+    public function getInstructions(): array
     {
         $instructions = [];
-        foreach ($this->defs as $def => $alias) {
+        foreach ($this->dataDefinitions as $def => $alias) {
             $alias = Render::string($alias);
             $instructions[] = "DEF:$alias=$def";
         }
-        foreach ($this->cdefs as $expression => $alias) {
+        foreach ($this->dataCalculations as $expression => $alias) {
             $alias = Render::string($alias);
             $instructions[] = "CDEF:$alias=$expression";
         }
-        foreach ($this->vdefs as $expression => $alias) {
+        foreach ($this->variableDefinitions as $expression => $alias) {
             $alias = Render::string($alias);
             $instructions[] = "VDEF:$alias=$expression";
         }
 
-        return array_merge($instructions, $this->instructions);
+        return $instructions;
     }
 }
