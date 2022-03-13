@@ -32,7 +32,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function cdef($expression, $preferredAlias = null)
+    public function cdef($expression, $preferredAlias = null): string
     {
         if (isset($this->cdefs[$expression])) {
             return $this->cdefs[$expression];
@@ -46,7 +46,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function vdef($expression, $preferredAlias = null)
+    public function vdef($expression, $preferredAlias = null): string
     {
         if (isset($this->vdefs[$expression])) {
             return $this->vdefs[$expression];
@@ -60,7 +60,7 @@ class RrdGraphData
         return $alias;
     }
 
-    protected function getUniqueAlias($name)
+    protected function getUniqueAlias($name): string
     {
         while (isset($this->usedAliases[$name])) {
             $name = $this->makeNextName($name);

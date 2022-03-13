@@ -12,7 +12,11 @@ class Color
     protected ?string $hexCode = null;
     protected ?string $alpha = null;
 
-    public function __construct($hexCode, $alpha = null)
+    /**
+     * @param string|Color|null $hexCode
+     * @param string|Color|null $alpha
+     */
+    public function __construct($hexCode = null, $alpha = null)
     {
         if ($hexCode === null) {
             return;
@@ -61,7 +65,7 @@ class Color
     }
 
     /**
-     * @param $color
+     * @param string|Color|null $color
      * @return Color
      */
     public static function create($color): Color
