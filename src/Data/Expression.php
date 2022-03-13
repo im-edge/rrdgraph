@@ -44,7 +44,7 @@ abstract class Expression implements DataDefinitionInterface
     protected VariableName $variable;
     protected RpnExpression $expression;
 
-    public function __construct(VariableName $variableName, RpnExpression $expression)
+    final public function __construct(VariableName $variableName, RpnExpression $expression)
     {
         $this->variable = $variableName;
         $this->expression = $expression;

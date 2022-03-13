@@ -47,7 +47,7 @@ class Def implements DataDefinitionInterface
     public ?StringType $reduce = null;
     public ?StringType $daemon = null;
 
-    public function __construct(
+    final public function __construct(
         VariableName $variableName,
         StringType $rrdFile,
         StringType $dsName,
@@ -79,7 +79,7 @@ class Def implements DataDefinitionInterface
                 "'%s' expects at least %d parameters, got: %s",
                 static::TAG,
                 static::REQUIRED_PARAMETERS,
-                json_encode($parameters)
+                var_export($parameters, true)
             ));
         }
     }

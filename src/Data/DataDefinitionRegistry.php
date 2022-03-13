@@ -7,7 +7,7 @@ use gipfl\RrdGraph\ClassRegistry;
 abstract class DataDefinitionRegistry
 {
     use ClassRegistry;
-    private const IMPLEMENTATIONS = [
+    protected const IMPLEMENTATIONS = [
         CDef::TAG => CDef::class,
         Def::TAG  => Def::class,
         VDef::TAG => VDef::class,

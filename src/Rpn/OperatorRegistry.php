@@ -8,7 +8,7 @@ abstract class OperatorRegistry
 {
     use ClassRegistry;
 
-    private const IMPLEMENTATIONS = [
+    protected const IMPLEMENTATIONS = [
         // BooleanOperator
         Equal::NAME          => Equal::class,
         GreaterOrEqual::NAME => GreaterOrEqual::class,

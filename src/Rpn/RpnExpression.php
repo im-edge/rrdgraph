@@ -36,7 +36,7 @@ class RpnExpression
     {
         $stack = explode(',', $string);
         $operatorName = array_pop($stack);
-        if ($operatorName === null) {
+        if (strlen($operatorName) === 0) {
             throw new InvalidArgumentException("'$string' is not a valid RPN expression");
         }
 
