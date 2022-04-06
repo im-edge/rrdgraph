@@ -5,7 +5,6 @@ namespace gipfl\RrdGraph\Data;
 use gipfl\RrdGraph\DataType\StringType;
 use gipfl\RrdGraph\ParseUtils;
 use gipfl\RrdGraph\Rpn\RpnExpression;
-use InvalidArgumentException;
 
 /**
  * Either a CDEF or a VDEF
@@ -58,6 +57,9 @@ abstract class Expression implements DataDefinitionInterface
     public static function fromParameters(array $parameters): Expression
     {
         list($name, $expression) = ParseUtils::splitKeyValue($parameters[0], '=');
-        return new static(new VariableName(StringType::parse($name)), RpnExpression::parse($expression));
+        return new static(
+            new VariableName(StringType::parse($name)->getRawString()),
+            RpnExpression::parse($expression)
+        );
     }
 }

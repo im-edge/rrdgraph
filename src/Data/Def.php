@@ -65,14 +65,14 @@ class Def implements DataDefinitionInterface
         list($varName, $file) = ParseUtils::splitKeyValue(array_shift($parameters), '=');
 
         return new static(
-            new VariableName(StringType::parse($varName)),
+            new VariableName(StringType::parse($varName)->getRawString()),
             StringType::parse($file),
             StringType::parse(array_shift($parameters)),
             StringType::parse(array_shift($parameters))
         );
     }
 
-    protected static function assertRequiredParameterCount(array $parameters)
+    protected static function assertRequiredParameterCount(array $parameters): void
     {
         if (count($parameters) < static::REQUIRED_PARAMETERS) {
             throw new InvalidArgumentException(sprintf(
@@ -95,10 +95,10 @@ class Def implements DataDefinitionInterface
     {
         return sprintf(
             self::TAG . ':%s=%s:%s:%s',
-            $this->variable,
-            $this->rrdFile,
-            $this->dsName,
-            $this->consolidationFunction
+            (string) $this->variable,
+            (string) $this->rrdFile,
+            (string) $this->dsName,
+            (string) $this->consolidationFunction
         ) . $this->renderOptionalParameters();
     }
 }

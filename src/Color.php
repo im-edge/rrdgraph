@@ -38,7 +38,7 @@ class Color
         }
 
         if ($alpha !== null) {
-            $this->setAlphaHex($alpha);
+            $this->setAlphaHex((string) $alpha);
         }
     }
 
@@ -79,7 +79,7 @@ class Color
 
     public function __toString()
     {
-        if ($this->isNull()) {
+        if ($this->hexCode === null) {
             return '';
         }
 

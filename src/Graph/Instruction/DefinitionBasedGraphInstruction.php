@@ -9,6 +9,7 @@ use gipfl\RrdGraph\ParseUtils;
 
 abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterface
 {
+    const TAG = 'DEFINITION_WITHOUT_TAG';
     protected VariableName $definition;
     protected Color $color;
     protected ?StringType $legend = null;
