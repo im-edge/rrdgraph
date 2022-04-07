@@ -12,10 +12,10 @@ use gipfl\RrdGraph\DataType\BooleanType;
  */
 trait SkipScale
 {
-    protected ?BooleanType $skipscale = null;
+    protected ?BooleanType $skipScale = null;
 
     public function isSkipScale(): bool
     {
-        return $this->s && $this->skipScale->getValue();
+        return $this->skipScale && $this->skipScale->getValue();
     }
 }
