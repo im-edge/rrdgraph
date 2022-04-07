@@ -15,6 +15,15 @@ trait ClassRegistry
         throw new InvalidArgumentException("'$tag' is not a known TAG");
     }
 
+    public static function getOptionalClass(string $tag): ?string
+    {
+        if (isset(static::IMPLEMENTATIONS[$tag])) {
+            return static::IMPLEMENTATIONS[$tag];
+        }
+
+        return null;
+    }
+
     public static function isKnown(string $name): bool
     {
         return isset(self::IMPLEMENTATIONS[$name]);
