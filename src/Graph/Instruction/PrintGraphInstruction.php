@@ -36,9 +36,9 @@ class PrintGraphInstruction implements GraphInstructionInterface
     protected ?bool $valstrfduration = null;
 
     // TODO: [:strftime|:valstrftime|:valstrfduration]
-    public function __construct(string $vname, string $format)
+    public function __construct(string $vName, string $format)
     {
-        $this->setVariableName($vname);
+        $this->setVariableName($vName);
         $this->setFormat($format);
     }
 
