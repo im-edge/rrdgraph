@@ -7,6 +7,7 @@ use function preg_match;
 
 class IntegerType implements DataTypeInterface
 {
+    const REGEXP = '/^-?\d+$/';
     protected int $value;
 
     public function __construct(int $value)
@@ -24,9 +25,14 @@ class IntegerType implements DataTypeInterface
         return (string) $this->value;
     }
 
+    public static function isValid(string $string): bool
+    {
+        return preg_match(self::REGEXP, $string);
+    }
+
     public static function parse(string $string): IntegerType
     {
-        if (preg_match('/^-?\d+$/', $string)) {
+        if (static::isValid($string)) {
             return new static((int) $string);
         }
 
