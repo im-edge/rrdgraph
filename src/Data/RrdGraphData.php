@@ -60,6 +60,21 @@ class RrdGraphData
         return $alias;
     }
 
+    public function getDefinition(string $alias): DataDefinitionInterface
+    {
+        if (isset($this->dataDefinitions[$alias])) {
+            return $this->dataDefinitions[$alias];
+        }
+        if (isset($this->dataCalculations[$alias])) {
+            return $this->dataCalculations[$alias];
+        }
+        if (isset($this->variableDefinitions[$alias])) {
+            return $this->variableDefinitions[$alias];
+        }
+
+        throw new \OutOfBoundsException("No definition named '$alias' has been registered");
+    }
+
     protected function getUniqueAlias($name): string
     {
         while (isset($this->usedAliases[$name])) {
