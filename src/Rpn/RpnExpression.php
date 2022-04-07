@@ -3,10 +3,11 @@
 namespace gipfl\RrdGraph\Rpn;
 
 use gipfl\RrdGraph\Data\VariableName;
+use gipfl\RrdGraph\InstructionInterface;
 use InvalidArgumentException;
 use RuntimeException;
 
-class RpnExpression
+class RpnExpression implements InstructionInterface
 {
     protected Operator $operator;
     protected array $parameters;
@@ -63,12 +64,24 @@ class RpnExpression
         return $this;
     }
 
+    /**
+     * @param string $string
+     * @return static
+     */
     public static function parse(string $string): RpnExpression
     {
-        $stack = explode(',', $string);
+        return static::fromParameters(explode(',', $string));
+    }
+
+    public static function fromParameters(array $parameters): RpnExpression
+    {
+        $stack = $parameters;
         $operatorName = array_pop($stack);
         if (strlen($operatorName) === 0) {
-            throw new InvalidArgumentException("'$string' is not a valid RPN expression");
+            throw new InvalidArgumentException(sprintf(
+                "'%s' is not a valid RPN expression",
+                implode(',', $stack)
+            ));
         }
 
         $expression = static::consumeStackOperator($operatorName, $stack);
@@ -150,7 +163,7 @@ class RpnExpression
         return $string;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->renderParams() . $this->operator::NAME;
     }
