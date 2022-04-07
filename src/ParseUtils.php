@@ -28,7 +28,7 @@ class ParseUtils
     {
         $pos = strpos($string, $separator);
         if ($pos === false) {
-            throw new InvalidArgumentException("Found no '%s': %s", $separator, $string);
+            throw new InvalidArgumentException(sprintf("Found no '%s' in %s", $separator, $string));
         }
 
         return [substr($string, 0, $pos), substr($string, $pos + 1)];
