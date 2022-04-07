@@ -3,7 +3,6 @@
 namespace gipfl\RrdGraph\DataType;
 
 use function addcslashes;
-use function ctype_alnum;
 use function stripcslashes;
 use function strlen;
 
@@ -38,6 +37,7 @@ class StringType implements DataTypeInterface
                 $string = substr($string, 1, -1);
             }
         }
+
         return new static($string);
     }
 }
