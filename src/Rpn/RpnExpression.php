@@ -2,6 +2,7 @@
 
 namespace gipfl\RrdGraph\Rpn;
 
+use gipfl\RrdGraph\Data\VariableName;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -15,6 +16,7 @@ class RpnExpression
      * Expression constructor.
      * @param Operator $operator
      * @param array $parameters
+     * @param array $variadicParameters
      */
     public function __construct(Operator $operator, array $parameters = [], array $variadicParameters = [])
     {
@@ -30,6 +32,35 @@ class RpnExpression
         }
         $this->parameters = $parameters;
         $this->variadicParameters = $variadicParameters;
+    }
+
+    public function listUsedVariableNames(): array
+    {
+        $names = [];
+        foreach ($this->parameters as $parameter) {
+            if ($parameter instanceof VariableName) {
+                $names[] = (string) $parameter;
+            } elseif ($parameter instanceof RpnExpression) {
+                foreach ($parameter->listUsedVariableNames() as $name) {
+                    $names[] = $name;
+                }
+            }
+        }
+
+        return $names;
+    }
+
+    public function renameVariable($oldName, $newName): self
+    {
+        foreach ($this->parameters as $parameter) {
+            if ($parameter instanceof VariableName && $parameter->getName() === $oldName) {
+                $parameter->setName($newName);
+            } elseif ($parameter instanceof RpnExpression) {
+                $parameter->renameVariable($oldName, $newName);
+            }
+        }
+
+        return $this;
     }
 
     public static function parse(string $string): RpnExpression
@@ -135,6 +166,10 @@ class RpnExpression
                 // Hint: this is recursive. A flat variant could be a better alternative
                 $value = RpnExpression::consumeStackOperator($value, $stack);
             }
+        }
+
+        if (is_string($value) && VariableName::isValid($value)) {
+            $value = new VariableName($value);
         }
 
         return $value;
