@@ -2,6 +2,7 @@
 
 namespace gipfl\RrdGraph\Graph\Instruction;
 
+use gipfl\RrdGraph\DataType\FloatType;
 use gipfl\RrdGraph\Render;
 
 /**
@@ -24,10 +25,10 @@ class Tick extends DefinitionBasedGraphInstruction
 
     const TAG = 'TICK';
 
-    protected ?float $fraction = null;
+    protected ?FloatType $fraction = null;
     protected bool $skipScale = false;
 
-    public function getFraction(): ?float
+    public function getFraction(): FloatType
     {
         return $this->fraction;
     }
@@ -40,15 +41,10 @@ class Tick extends DefinitionBasedGraphInstruction
      * the fraction is negative they start at the upper border of the graphing
      * area.
      */
-    public function setFraction(?float $fraction): self
+    public function setFraction(FloatType $fraction): self
     {
         $this->fraction = $fraction;
         return $this;
-    }
-
-    protected function renderFraction(): string
-    {
-        return $this->fraction === null ? '' : Render::float($this->fraction);
     }
 
     public function __toString(): string
@@ -56,7 +52,7 @@ class Tick extends DefinitionBasedGraphInstruction
         return self::TAG . ':'
             . $this->definition
             . $this->color
-            . Render::optionalParameter($this->renderFraction())
+            . Render::optionalParameter($this->fraction)
             . Render::optionalParameter($this->legend);
     }
 }

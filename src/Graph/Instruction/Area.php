@@ -4,10 +4,10 @@ namespace gipfl\RrdGraph\Graph\Instruction;
 
 use gipfl\RrdGraph\Color;
 use gipfl\RrdGraph\DataType\BooleanType;
+use gipfl\RrdGraph\DataType\FloatType;
 use gipfl\RrdGraph\DataType\IntegerType;
 use gipfl\RrdGraph\OptionalParameters;
 use gipfl\RrdGraph\Render;
-use InvalidArgumentException;
 
 /**
  * Draw a filled area
@@ -29,8 +29,8 @@ class Area extends DefinitionBasedGraphInstruction
 
     const TAG = 'AREA';
     const OPTIONAL_PARAMETERS = [
-        'STACK' => BooleanType::class,
-        'skipscale' => BooleanType::class,
+        'STACK'      => BooleanType::class,
+        'skipscale'  => BooleanType::class,
         'gradheight' => IntegerType::class, // TODO: Float?
     ];
     protected ?Color $color2;
@@ -43,7 +43,7 @@ class Area extends DefinitionBasedGraphInstruction
      *
      * The default value for gradheight is 50.
      */
-    protected ?IntegerType $gradientHeight; // TODO: float?
+    protected ?FloatType $gradientHeight;
 
     public function __toString(): string
     {
