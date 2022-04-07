@@ -86,7 +86,7 @@ class DataDefinition implements ExpressionInterface
     public function __toString(): string
     {
         return sprintf(
-           '%s:%s:%s',
+            '%s:%s:%s',
             $this->rrdFile,
             $this->dsName,
             $this->consolidationFunction
