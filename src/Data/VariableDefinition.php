@@ -19,13 +19,11 @@ namespace gipfl\RrdGraph\Data;
  * Note that currently only aggregation functions work in VDEF rpn expressions.
  * Patches to change this are welcome.
  *
- * TODO: Rename to VariableDefinition?
- *
  * Synopsis
  * --------
  * VDEF:vname=RPN expression
  */
-class VDef extends Expression
+class VariableDefinition extends Expression
 {
     const TAG = 'VDEF';
 }

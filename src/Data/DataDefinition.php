@@ -14,12 +14,10 @@ use function sprintf;
 /**
  * Synopsis:
  *
- * TODO: Rename to DataDefinition?
- *
  * DEF:<vname>=<rrdfile>:<ds-name>:<CF>[:step=<step>][:start=<time>][:end=<time>]
  *    [:reduce=<CF>][:daemon=<address>]
  */
-class Def implements DataDefinitionInterface
+class DataDefinition implements ExpressionInterface
 {
     use OptionalParameters;
 
@@ -34,7 +32,6 @@ class Def implements DataDefinitionInterface
     ];
 
     // Required Parameters
-    public VariableName $variable;
     public StringType $rrdFile;
     public StringType $dsName;
     /** @var StringType With PHP 8.1, this could become a backed Enum */
@@ -48,25 +45,21 @@ class Def implements DataDefinitionInterface
     public ?StringType $daemon = null;
 
     final public function __construct(
-        VariableName $variableName,
         StringType $rrdFile,
         StringType $dsName,
         StringType $consolidationFunction
     ) {
-        $this->variable = $variableName;
         $this->rrdFile = $rrdFile;
         $this->dsName = $dsName;
         $this->consolidationFunction = $consolidationFunction;
     }
 
-    protected static function fromRequiredParameters(array &$parameters): Def
+    protected static function fromRequiredParameters(array &$parameters): DataDefinition
     {
         static::assertRequiredParameterCount($parameters);
-        list($varName, $file) = ParseUtils::splitKeyValue(array_shift($parameters), '=');
 
         return new static(
-            new VariableName(StringType::parse($varName)->getRawString()),
-            StringType::parse($file),
+            StringType::parse(array_shift($parameters)),
             StringType::parse(array_shift($parameters)),
             StringType::parse(array_shift($parameters))
         );
@@ -84,7 +77,7 @@ class Def implements DataDefinitionInterface
         }
     }
 
-    public static function fromParameters(array $parameters): Def
+    public static function fromParameters(array $parameters): DataDefinition
     {
         $self = static::fromRequiredParameters($parameters);
         $self->setOptionalParameters($parameters);
@@ -94,11 +87,15 @@ class Def implements DataDefinitionInterface
     public function __toString(): string
     {
         return sprintf(
-            self::TAG . ':%s=%s:%s:%s',
-            (string) $this->variable,
-            (string) $this->rrdFile,
-            (string) $this->dsName,
-            (string) $this->consolidationFunction
+           '%s:%s:%s',
+            $this->rrdFile,
+            $this->dsName,
+            $this->consolidationFunction
         ) . $this->renderOptionalParameters();
+    }
+
+    public function getTag(): string
+    {
+        return self::TAG;
     }
 }

@@ -16,13 +16,11 @@ namespace gipfl\RrdGraph\Data;
  *
  * Example: CDEF:mydatabits=mydata,8,*
  *
- * TODO: Rename to DataCalculation?
- *
  * Synopsis
  * --------
  * CDEF:vname=RPN expression
  */
-class CDef extends Expression
+class DataCalculation extends Expression
 {
     const TAG = 'CDEF';
 }

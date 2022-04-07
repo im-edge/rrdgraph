@@ -8,8 +8,8 @@ abstract class DataDefinitionRegistry
 {
     use ClassRegistry;
     protected const IMPLEMENTATIONS = [
-        CDef::TAG => CDef::class,
-        Def::TAG  => Def::class,
-        VDef::TAG => VDef::class,
+        DataCalculation::TAG => DataCalculation::class,
+        DataDefinition::TAG  => DataDefinition::class,
+        VariableDefinition::TAG => VariableDefinition::class,
     ];
 }

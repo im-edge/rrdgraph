@@ -6,19 +6,19 @@ use gipfl\RrdGraph\Render;
 
 class RrdGraphData
 {
-    /** @var Def[] Data Definition */
+    /** @var DataDefinition[] Data Definition */
     protected array $dataDefinitions = [];
 
-    /** @var CDef[] Data Calculation */
+    /** @var DataCalculation[] Data Calculation */
     protected array $dataCalculations = [];
 
-    /** @var VDef[] Variable Definitions */
+    /** @var VariableDefinition[] Variable Definitions */
     protected array $variableDefinitions = [];
 
     /** @var string[] */
     protected array $usedAliases = [];
 
-    public function def($filename, $ds, $cf)
+    public function addDataDefinition($filename, $ds, $cf)
     {
         $filename = Render::string($filename);
         $quotedDs = Render::string($ds);
@@ -32,7 +32,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function cdef($expression, $preferredAlias = null): string
+    public function addDataCalculation($expression, $preferredAlias = null): string
     {
         if (isset($this->dataCalculations[$expression])) {
             return $this->dataCalculations[$expression];
@@ -46,7 +46,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function vdef($expression, $preferredAlias = null): string
+    public function addVariableDefinition($expression, $preferredAlias = null): string
     {
         if (isset($this->variableDefinitions[$expression])) {
             return $this->variableDefinitions[$expression];
