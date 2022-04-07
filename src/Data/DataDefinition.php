@@ -7,7 +7,6 @@ use gipfl\RrdGraph\DataType\StringType;
 use gipfl\RrdGraph\DataType\TimeInterface;
 use gipfl\RrdGraph\DataType\TimeType;
 use gipfl\RrdGraph\OptionalParameters;
-use gipfl\RrdGraph\ParseUtils;
 use InvalidArgumentException;
 use function sprintf;
 
