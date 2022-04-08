@@ -3,7 +3,6 @@
 namespace gipfl\RrdGraph\Graph\Instruction;
 
 use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\Render;
 
 /**
  * Comment text to be printed to the legend
