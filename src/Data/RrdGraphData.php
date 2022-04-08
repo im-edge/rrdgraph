@@ -60,7 +60,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function getDefinition(string $alias): DataDefinitionInterface
+    public function getDefinition(string $alias): ExpressionInterface
     {
         if (isset($this->dataDefinitions[$alias])) {
             return $this->dataDefinitions[$alias];

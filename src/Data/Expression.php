@@ -2,8 +2,6 @@
 
 namespace gipfl\RrdGraph\Data;
 
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\ParseUtils;
 use gipfl\RrdGraph\Rpn\RpnExpression;
 
 /**
@@ -36,30 +34,7 @@ use gipfl\RrdGraph\Rpn\RpnExpression;
  * to use a CDEF again since VDEFs only look like RPN expressions, they aren't
  * really.
  */
-abstract class Expression implements DataDefinitionInterface
+abstract class Expression extends RpnExpression implements DataDefinitionInterface
 {
     const TAG = 'INVALID';
-
-    protected VariableName $variable;
-    protected RpnExpression $expression;
-
-    final public function __construct(VariableName $variableName, RpnExpression $expression)
-    {
-        $this->variable = $variableName;
-        $this->expression = $expression;
-    }
-
-    public function __toString(): string
-    {
-        return static::TAG . ':' . $this->variable . '=' . $this->expression;
-    }
-
-    public static function fromParameters(array $parameters): Expression
-    {
-        list($name, $expression) = ParseUtils::splitKeyValue($parameters[0], '=');
-        return new static(
-            new VariableName(StringType::parse($name)->getRawString()),
-            RpnExpression::parse($expression)
-        );
-    }
 }

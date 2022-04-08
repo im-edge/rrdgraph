@@ -2,9 +2,6 @@
 
 namespace gipfl\RrdGraph\Data;
 
-use gipfl\RrdGraph\InstructionInterface;
-
-interface DataDefinitionInterface extends InstructionInterface
+interface DataDefinitionInterface extends ExpressionInterface
 {
-    public static function fromParameters(array $parameters): DataDefinitionInterface;
 }
