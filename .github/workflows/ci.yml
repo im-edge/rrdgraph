@@ -31,5 +31,8 @@ jobs:
       - name: Verify Coding Standards
         run: vendor/bin/phpcs
 
+      - name: Static Code Analysis
+        run: vendor/bin/phpstan
+
       - name: Unit Tests
         run: vendor/bin/phpunit --testdox
