@@ -28,7 +28,7 @@ jobs:
           coverage: xdebug
 
       - name: Install Dependencies with Composer
-        run: composer install
+        run: composer install --ignore-platform-req=php+
 
       - name: Verify Coding Standards
         run: vendor/bin/phpcs
