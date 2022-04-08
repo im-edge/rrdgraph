@@ -1,4 +1,4 @@
-name: CI - Unit Tests and Coding Standards
+name: Static Analysis
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   Tests:
-    name: PHP ${{ matrix.php }} Tests and Coding Standards
+    name: Static Analysis (PHP ${{ matrix.php }})
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -30,11 +30,5 @@ jobs:
       - name: Install Dependencies with Composer
         run: composer install --ignore-platform-req=php+
 
-      - name: Verify Coding Standards
-        run: vendor/bin/phpcs
-
       - name: Static Code Analysis
         run: vendor/bin/phpstan
-
-      - name: Unit Tests
-        run: vendor/bin/phpunit --testdox
