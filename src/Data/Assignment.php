@@ -7,6 +7,7 @@ use gipfl\RrdGraph\GraphDefinitionParser;
 use gipfl\RrdGraph\ParseUtils;
 use gipfl\RrdGraph\Rpn\RpnExpression;
 use OutOfBoundsException;
+use RuntimeException;
 
 class Assignment
 {
@@ -55,6 +56,20 @@ class Assignment
         }
 
         return new Assignment($tag, $varName, $expression);
+    }
+
+    public function getExpression(): ExpressionInterface
+    {
+        return $this->expression;
+    }
+
+    public function getRpnExpression(): RpnExpression
+    {
+        if ($this->expression instanceof RpnExpression) {
+            return $this->expression;
+        }
+
+        throw new RuntimeException(sprintf('%s Assignment has no RPN expression', $this->tag));
     }
 
     public static function assertValidTag($tag)
