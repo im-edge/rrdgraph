@@ -33,7 +33,7 @@ class IntegerType implements DataTypeInterface
     public static function parse(string $string): IntegerType
     {
         if (static::isValid($string)) {
-            return new static((int) $string);
+            return new IntegerType((int) $string);
         }
 
         throw new InvalidArgumentException("Integer expected, got '$string");

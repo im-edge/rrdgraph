@@ -45,6 +45,6 @@ class AlignmentEnum implements DataTypeInterface
 
     public static function parse(string $string): DataTypeInterface
     {
-        return new static($string);
+        return new AlignmentEnum($string);
     }
 }

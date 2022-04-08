@@ -31,7 +31,7 @@ class FloatType implements DataTypeInterface
     public static function parse(string $string): FloatType
     {
         if (static::isValid($string)) {
-            return new static((float) $string);
+            return new FloatType((float) $string);
         }
 
         throw new InvalidArgumentException("Float expected, got '$string");

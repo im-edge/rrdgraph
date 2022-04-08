@@ -15,7 +15,7 @@ class BooleanType implements DataTypeInterface
         $this->label = $label;
     }
 
-    public function getValue(): string
+    public function getValue(): bool
     {
         return $this->value;
     }
@@ -33,7 +33,7 @@ class BooleanType implements DataTypeInterface
     public static function parse(string $string): BooleanType
     {
         if (strlen($string) > 0) {
-            return new static(true, $string);
+            return new BooleanType(true, $string);
         }
 
         throw new \RuntimeException('Cannot determine boolean type öabel from empty string');

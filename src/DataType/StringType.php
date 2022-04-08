@@ -38,6 +38,6 @@ class StringType implements DataTypeInterface
             }
         }
 
-        return new static($string);
+        return new StringType($string);
     }
 }
