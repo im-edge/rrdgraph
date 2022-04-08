@@ -31,9 +31,13 @@ class Comment implements GraphInstructionInterface
         $this->text = $text;
     }
 
-
     public function __toString(): string
     {
         return self::TAG . ':' . $this->text;
+    }
+
+    public static function fromParameters(array $parameters): Comment
+    {
+        return new Comment(...$parameters);
     }
 }

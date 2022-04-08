@@ -10,10 +10,10 @@ use gipfl\RrdGraph\DataType\BooleanType;
  */
 trait Stack
 {
-    protected ?BooleanType $stack = null;
+    protected ?BooleanType $STACK = null;
 
     public function isStack(): bool
     {
-        return $this->stack->isTrue();
+        return $this->STACK && $this->STACK->isTrue();
     }
 }

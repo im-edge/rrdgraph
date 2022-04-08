@@ -8,7 +8,7 @@ abstract class InstructionRegistry
 {
     use ClassRegistry;
 
-    private const IMPLEMENTATIONS = [
+    protected const IMPLEMENTATIONS = [
         Area::TAG      => Area::class,
         Comment::TAG   => Comment::class,
         GPrint::TAG    => GPrint::class,

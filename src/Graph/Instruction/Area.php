@@ -33,7 +33,7 @@ class Area extends DefinitionBasedGraphInstruction
         'skipscale'  => BooleanType::class,
         'gradheight' => IntegerType::class, // TODO: Float?
     ];
-    protected ?Color $color2;
+    protected ?Color $color2 = null;
     /**
      * The gradheight parameter can create three different behaviors. If
      * gradheight > 0, then the gradient is a fixed height, starting at the
@@ -43,7 +43,7 @@ class Area extends DefinitionBasedGraphInstruction
      *
      * The default value for gradheight is 50.
      */
-    protected ?FloatType $gradientHeight;
+    protected ?FloatType $gradheight = null;
 
     public function __toString(): string
     {
@@ -52,9 +52,9 @@ class Area extends DefinitionBasedGraphInstruction
             . $this->color
             . $this->color2
             . Render::optionalParameter($this->legend)
-            . Render::optionalParameter($this->stack) // Named
+            . Render::optionalParameter($this->STACK) // Named
             . Render::optionalParameter($this->skipscale)
-            . Render::optionalNamedParameter('gradheight', $this->gradientHeight)
+            . Render::optionalNamedParameter('gradheight', $this->gradheight)
         ;
     }
 }

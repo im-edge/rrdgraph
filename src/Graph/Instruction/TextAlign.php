@@ -3,6 +3,7 @@
 namespace gipfl\RrdGraph\Graph\Instruction;
 
 use gipfl\RrdGraph\DataType\AlignmentEnum;
+use Svg\Tag\Text;
 
 /**
  * From `man rrdgraph_graph`:
@@ -28,5 +29,10 @@ class TextAlign implements GraphInstructionInterface
     public function __toString(): string
     {
         return self::TAG . ':' . $this->alignment;
+    }
+
+    public static function fromParameters(array $parameters): TextAlign
+    {
+        return new TextAlign(...$parameters);
     }
 }

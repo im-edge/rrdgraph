@@ -2,6 +2,10 @@
 
 namespace gipfl\RrdGraph\Graph\Instruction;
 
+use gipfl\RrdGraph\Data\VariableName;
+use gipfl\RrdGraph\DataType\BooleanType;
+use gipfl\RrdGraph\DataType\StringType;
+
 /**
  * man rrdgraph_graph
  * ------------------
@@ -29,50 +33,35 @@ class PrintGraphInstruction implements GraphInstructionInterface
 {
     const TAG = 'PRINT';
 
-    protected string $variableName;
-    protected string $format;
-    protected ?bool $strftime = null;
-    protected ?bool $valstrftime = null;
-    protected ?bool $valstrfduration = null;
+    protected VariableName $variableName;
+    protected StringType $format;
+    protected ?BooleanType $strftime = null;
+    protected ?BooleanType $valstrftime = null;
+    protected ?BooleanType $valstrfduration = null;
 
     // TODO: [:strftime|:valstrftime|:valstrfduration]
-    public function __construct(string $vName, string $format)
+    final public function __construct(VariableName $variableName, StringType $format)
     {
-        $this->setVariableName($vName);
-        $this->setFormat($format);
+        $this->variableName = $variableName;
+        $this->format = $format;
     }
 
-    /**
-     * @return string
-     */
-    public function getVariableName(): string
+    public function getVariableName(): VariableName
     {
         return $this->variableName;
     }
 
-    public function setVariableName(string $variableName): self
-    {
-        $this->variableName = $variableName;
-        return $this;
-    }
-
-    public function getFormat(): string
+    public function getFormat(): StringType
     {
         return $this->format;
     }
 
-    public function setFormat(string $format): self
-    {
-        $this->format = $format;
-        return $this;
-    }
-
     public function isStrftime(): bool
     {
-        return $this->strftime === true;
+        return $this->strftime && $this->strftime->isTrue() === true;
     }
 
-    public function setStrftime(?bool $strftime = true): self
+    public function setStrftime(?BooleanType $strftime): self
     {
         $this->strftime = $strftime;
         return $this;
@@ -80,10 +69,10 @@ class PrintGraphInstruction implements GraphInstructionInterface
 
     public function isValstrftime(): bool
     {
-        return $this->valstrftime === true;
+        return $this->valstrftime && $this->valstrftime->isTrue();
     }
 
-    public function setValstrftime(?bool $valstrftime = true): self
+    public function setValstrftime(?BooleanType $valstrftime): self
     {
         $this->valstrftime = $valstrftime;
         return $this;
@@ -91,10 +80,10 @@ class PrintGraphInstruction implements GraphInstructionInterface
 
     public function isValstrfduration(): bool
     {
-        return $this->valstrfduration === true;
+        return $this->valstrfduration && $this->valstrfduration->isTrue();
     }
 
-    public function setValstrfduration(?bool $valstrfduration = true): self
+    public function setValstrfduration(?BooleanType $valstrfduration): self
     {
         $this->valstrfduration = $valstrfduration;
         return $this;
@@ -111,5 +100,10 @@ class PrintGraphInstruction implements GraphInstructionInterface
 
             // NOPE: this is not correct, it is only one of those flags
             ;
+    }
+
+    public static function fromParameters(array $parameters)
+    {
+        return new static(...$parameters);
     }
 }

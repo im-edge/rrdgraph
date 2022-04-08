@@ -2,6 +2,9 @@
 
 namespace gipfl\RrdGraph\Graph\Instruction;
 
+use gipfl\RrdGraph\Data\VariableName;
+use gipfl\RrdGraph\DataType\IntegerType;
+
 /**
  * Graph the following elements with a specified time offset
  *
@@ -23,39 +26,32 @@ class Shift implements GraphInstructionInterface
 {
     const TAG = 'SHIFT';
 
-    protected string $variableName;
-    protected int $offset;
+    protected VariableName $variableName;
+    protected IntegerType $offset;
 
-    public function __construct(string $vname, int $offset)
+    public function __construct(VariableName $variableName, IntegerType $offset)
     {
-        $this->setVariableName($vname);
-        $this->setOffset($offset);
+        $this->variableName = $variableName;
+        $this->offset = $offset;
     }
 
-    public function getVariableName(): string
+    public function getVariableName(): VariableName
     {
         return $this->variableName;
     }
 
-    public function setVariableName(string $variableName): self
-    {
-        $this->variableName = $variableName;
-        return $this;
-    }
-
-    public function getOffset(): int
+    public function getOffset(): IntegerType
     {
         return $this->offset;
-    }
-
-    public function setOffset(int $offset): self
-    {
-        $this->offset = $offset;
-        return $this;
     }
 
     public function __toString(): string
     {
         return self::TAG . ':' . $this->getVariableName() . ':' . $this->getOffset();
+    }
+
+    public static function fromParameters(array $parameters): Shift
+    {
+        return new Shift(...$parameters);
     }
 }

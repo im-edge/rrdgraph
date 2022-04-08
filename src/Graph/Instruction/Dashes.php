@@ -25,7 +25,7 @@ trait Dashes
      * Each value provides the length of alternate on_s and off_s portions of
      * the stroke.
      */
-    public function setDashes(?string $dashes)
+    public function setDashes(?string $dashes): self
     {
         $this->dashes = $dashes;
         return $this;
@@ -34,7 +34,7 @@ trait Dashes
     /**
      * @return string|null
      */
-    public function getDashOffset()
+    public function getDashOffset(): ?string
     {
         return $this->dashOffset;
     }
@@ -46,7 +46,7 @@ trait Dashes
      * @param string|null $dashOffset
      * @return $this
      */
-    public function setDashOffset($dashOffset): self
+    public function setDashOffset(?string $dashOffset): self
     {
         $this->dashOffset = $dashOffset;
         return $this;
