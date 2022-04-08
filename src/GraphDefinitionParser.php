@@ -3,9 +3,11 @@
 namespace gipfl\RrdGraph;
 
 use Generator;
-use gipfl\RrdGraph\Data\DataDefinitionInterface;
-use gipfl\RrdGraph\Data\DataDefinitionRegistry;
-use gipfl\RrdGraph\Data\Def;
+use gipfl\RrdGraph\Data\Assignment;
+use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
+use gipfl\RrdGraph\Graph\Instruction\InstructionRegistry;
+use gipfl\RrdGraph\Graph\Instruction\Line;
+use OutOfBoundsException;
 use RuntimeException;
 use function preg_match;
 use function strlen;
@@ -48,19 +50,22 @@ class GraphDefinitionParser
         foreach ($this->parseParameters() as $parameter) {
             $parameters[] = $parameter;
         }
-        if (DataDefinitionRegistry::isKnown($type)) {
-            /** @var string|DataDefinitionInterface $class */
-            $class = DataDefinitionRegistry::getClass($type);
-            $def = $class::fromParameters($parameters);
-            yield $def;
+
+        if (Assignment::isValidTag($type)) {
+            yield Assignment::fromAssignment($type, $parameters);
+        } elseif ($class = InstructionRegistry::getOptionalClass($type)) {
+            /** @var string|GraphInstructionInterface $class */
+            yield $class::fromParameters($parameters);
+        } elseif (preg_match('/^' . Line::TAG . '(\d*\.?\d+)$/', $type, $match)) {
+            $line = Line::fromParameters($parameters);
+            $line->setWidth($match[1]);
+            yield $line;
         } else {
-            var_dump($type);
-            exit;
-            yield [$type, $parameters];
+            throw new OutOfBoundsException("'$type' is not supported");
         }
     }
 
-    protected function readType(): string
+    public function readType(): string
     {
         $start = $this->position;
         $length = 1;
@@ -76,7 +81,7 @@ class GraphDefinitionParser
         return substr($this->string, $start, $length);
     }
 
-    protected function parseParameters(): Generator
+    public function parseParameters(): Generator
     {
         $start = $this->position + 1;
         $length = 0;

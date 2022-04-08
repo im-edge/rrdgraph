@@ -2,7 +2,7 @@
 
 namespace gipfl\Tests\RrdGraph;
 
-use gipfl\RrdGraph\Graph\Instruction\AlignmentEnum;
+use gipfl\RrdGraph\DataType\AlignmentEnum;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

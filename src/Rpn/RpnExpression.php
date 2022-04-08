@@ -2,12 +2,12 @@
 
 namespace gipfl\RrdGraph\Rpn;
 
+use gipfl\RrdGraph\Data\ExpressionInterface;
 use gipfl\RrdGraph\Data\VariableName;
-use gipfl\RrdGraph\InstructionInterface;
 use InvalidArgumentException;
 use RuntimeException;
 
-class RpnExpression implements InstructionInterface
+class RpnExpression implements ExpressionInterface
 {
     protected Operator $operator;
     protected array $parameters;
@@ -64,10 +64,6 @@ class RpnExpression implements InstructionInterface
         return $this;
     }
 
-    /**
-     * @param string $string
-     * @return static
-     */
     public static function parse(string $string): RpnExpression
     {
         return static::fromParameters(explode(',', $string));

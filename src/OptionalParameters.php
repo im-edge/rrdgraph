@@ -9,20 +9,12 @@ use function sprintf;
 
 trait OptionalParameters
 {
-    public static function fromParameters(array $parameters)
-    {
-        $positional = [];
-        /** @var DataTypeInterface $class */
-        foreach (self::POSITIONAL_PARAMETERS as $parameter => $class) {
-            $value = array_shift($parameters);
-        }
-    }
     protected function setOptionalParameters(array $parameters)
     {
         foreach ($parameters as $parameter) {
             list($param, $value) = ParseUtils::splitKeyValue($parameter, '=');
             $class = static::OPTIONAL_PARAMETERS[$param] ?? null;
-            /** @var DataTypeInterface $class */
+            /** @var ?DataTypeInterface $class */
             if ($class) {
                 $this->$param = $class::parse($value);
             } else {
