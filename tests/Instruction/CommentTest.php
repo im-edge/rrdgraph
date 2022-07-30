@@ -1,6 +1,6 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph;
+namespace gipfl\Tests\RrdGraph\Instruction;
 
 use gipfl\RrdGraph\DataType\StringType;
 use gipfl\RrdGraph\Graph\Instruction\Comment;

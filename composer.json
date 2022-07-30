@@ -14,7 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "gipfl\\RrdGraph\\": "src"
+            "gipfl\\RrdGraph\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "gipfl\\Tests\\RrdGraph\\": "tests/"
         }
     },
     "require": {

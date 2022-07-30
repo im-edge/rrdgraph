@@ -1,6 +1,6 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph;
+namespace gipfl\Tests\RrdGraph\Rpn;
 
 use gipfl\RrdGraph\GraphDefinitionParser;
 use PHPUnit\Framework\TestCase;

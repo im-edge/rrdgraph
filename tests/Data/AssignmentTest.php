@@ -1,6 +1,6 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph;
+namespace gipfl\Tests\RrdGraph\Data;
 
 use gipfl\RrdGraph\Data\Assignment;
 use gipfl\RrdGraph\Data\VariableName;
