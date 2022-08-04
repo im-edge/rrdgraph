@@ -99,6 +99,10 @@ class GraphDefinitionParser
             // TODO: we support unescaped colons in a string, should check whether rrdtool also does so
             if (! $stringContext) {
                 $next = $this->peek();
+                if ($next === null) {
+                    yield substr($this->string, $start, $length);
+                    return;
+                }
                 if ($next === self::FIELD_SEPARATOR) {
                     $this->requireNextCharacter();
                     yield substr($this->string, $start, $length);
@@ -108,10 +112,6 @@ class GraphDefinitionParser
                 }
                 if (preg_match('/[\r\n\s]/', $next)) {
                     $this->requireNextCharacter();
-                    yield substr($this->string, $start, $length);
-                    return;
-                }
-                if ($next === null) {
                     yield substr($this->string, $start, $length);
                     return;
                 }
