@@ -44,7 +44,7 @@ class VariableName
 
     public static function isValid(string $string): bool
     {
-        return preg_match(self::EXPRESSION, $string);
+        return preg_match(self::EXPRESSION, $string) !== false;
     }
 
     public function __toString(): string
