@@ -2,7 +2,7 @@
 
 namespace gipfl\RrdGraph\Rpn;
 
-class StreamPercentNan extends VariablesOperator
+class StreamPercentNan extends StreamPercent
 {
     const NAME = 'PERCENTNAN';
 }
