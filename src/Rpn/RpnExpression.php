@@ -118,7 +118,7 @@ class RpnExpression implements ExpressionInterface
     {
         $count = self::requireStackValue($stack, $operatorName);
         if (!ctype_digit($count)) {
-            throw new RuntimeException('Arity (variadic parameter count) expected, got ' . $count);
+            throw new RuntimeException('Arity (variadic parameter count) expected, got ' . var_export($count, true));
         }
 
         return (int) $count;
