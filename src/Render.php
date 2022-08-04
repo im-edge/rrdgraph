@@ -3,10 +3,15 @@
 namespace gipfl\RrdGraph;
 
 use gipfl\RrdGraph\DataType\DataTypeInterface;
+use InvalidArgumentException;
 use function addcslashes;
+use function ctype_digit;
+use function is_int;
+use function preg_replace;
+use function sprintf;
 use function strlen;
 
-abstract class Render
+final class Render
 {
     public static function string(?string $string): ?string
     {
@@ -56,16 +61,16 @@ abstract class Render
         }
     }
 
-    public static function float($number)
+    public static function float($number): string
     {
         if (is_float($number)) {
-            return \preg_replace('/(\..+?)0+$/', '\1', \sprintf('%.6F', $number));
-        } elseif (\is_int($number)) {
+            return preg_replace('/\.0+$/', '', preg_replace('/(\..+?)0+$/', '\1', sprintf('%.6F', $number)));
+        } elseif (is_int($number)) {
             return (string) $number;
-        } elseif (\ctype_digit($number)) {
+        } elseif (ctype_digit($number)) {
             return (string) (int) $number;
         }
 
-        throw new \InvalidArgumentException("Number expected, got $number");
+        throw new InvalidArgumentException("Number expected, got $number");
     }
 }
