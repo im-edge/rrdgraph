@@ -58,9 +58,19 @@ class Assignment
         return new Assignment($tag, $varName, $expression);
     }
 
+    public function getTag(): string
+    {
+        return $this->tag;
+    }
+
     public function getExpression(): ExpressionInterface
     {
         return $this->expression;
+    }
+
+    public function getVariableName(): VariableName
+    {
+        return $this->variableName;
     }
 
     public function getRpnExpression(): RpnExpression
