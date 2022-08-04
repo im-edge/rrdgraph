@@ -29,14 +29,21 @@ class GraphDefinitionParser
         $this->length = strlen($string);
     }
 
-    public function parse(): Generator
+    public function parse(): GraphDefinition
     {
+        $definition = new GraphDefinition();
         $limit = $this->length - 1;
         while ($this->position < $limit) {
             foreach ($this->parseDefinitions() as $res) {
-                yield $res;
+                if ($res instanceof GraphInstructionInterface) {
+                    $definition->addGraphInstruction($res);
+                } else {
+                    $definition->addAssignment($res);
+                }
             }
         }
+
+        return $definition;
     }
 
     protected function parseDefinitions(): Generator

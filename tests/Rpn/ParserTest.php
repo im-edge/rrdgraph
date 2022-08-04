@@ -52,10 +52,6 @@ class ParserTest extends TestCase
     protected function parseAndRender($defs)
     {
         $parser = new GraphDefinitionParser($defs);
-        $parsed = [];
-        foreach ($parser->parse() as $def) {
-            $parsed[] = $def;
-        }
-        $this->assertEquals($defs, implode(' ', $parsed));
+        $this->assertEquals($defs, (string) $parser->parse());
     }
 }
