@@ -72,7 +72,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
             'a,b,c,d,4,MEDIAN',
             'a,b,c,d,4,STDEV',
             // TODO:
-            'a,b,c,d,95,4,PERCENT',
+            // 'a,b,c,d,95,4,PERCENT',
             'x,1800,TREND',
             'x,1800,TRENDNAN',
 
@@ -151,7 +151,8 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
             'mydata,TOTAL',
             // Check this, either docs are wrong or PERCENT is VERY weird. Seems that when there is a VDEF, no count
             // is required. Same for STDEV
-            // VDEF:perc95=mydata,95,PERCENT VDEF:percnan95=mydata,95,PERCENTNAN
+            'mydata,95,PERCENT',
+            'mydata,95,PERCENTNAN',
             // 'mydata,LSLSLOPE',
             'mydata,LSLSLOPE',
             'mydata,LSLINT',
