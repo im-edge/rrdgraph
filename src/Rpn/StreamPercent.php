@@ -21,4 +21,5 @@ class StreamPercent extends VariablesOperator
 {
     // TODO: teach the parser how to distinct this from 'normal' PERCENT
     const NAME = 'PERCENT';
+    protected ?int $parameterCount = 2;
 }
