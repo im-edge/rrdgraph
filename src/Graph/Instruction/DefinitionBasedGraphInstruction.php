@@ -10,7 +10,7 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
 {
     const TAG = 'DEFINITION_WITHOUT_TAG';
     protected VariableName $definition;
-    protected Color $color;
+    protected ?Color $color = null;
     protected ?StringType $legend = null;
 
     final public function __construct(VariableName $definition, ?Color $color = null, ?StringType $legend = null)
@@ -30,8 +30,12 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
                 $parameter = new StringType($parameter);
             }
         }
-        foreach (array_reverse($parts) as $color) {
-            array_unshift($parameters, new Color($color));
+        if (empty($parts)) {
+            array_unshift($parameters, null);
+        } else {
+            foreach (array_reverse($parts) as $color) {
+                array_unshift($parameters, new Color($color));
+            }
         }
         array_unshift($parameters, $varName);
         return new static(...$parameters);
