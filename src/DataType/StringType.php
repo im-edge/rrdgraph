@@ -22,7 +22,7 @@ class StringType implements DataTypeInterface
 
     public function __toString(): string
     {
-        if (preg_match('/^[A-z0-9._-]+$/', $this->string)) {
+        if (preg_match('/^[A-Za-z0-9._-]+$/', $this->string)) {
             return $this->string;
         }
 
