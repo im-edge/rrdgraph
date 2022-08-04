@@ -58,7 +58,11 @@ class GraphDefinitionParser
             yield $class::fromParameters($parameters);
         } elseif (preg_match('/^' . Line::TAG . '(\d*\.?\d+)$/', $type, $match)) {
             $line = Line::fromParameters($parameters);
-            $line->setWidth($match[1]);
+            if (ctype_digit($match[1])) {
+                $line->setWidth((int) $match[1]);
+            } else {
+                $line->setWidth((float) $match[1]);
+            }
             yield $line;
         } else {
             throw new OutOfBoundsException("'$type' is not supported");
