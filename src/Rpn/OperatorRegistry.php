@@ -60,7 +60,7 @@ abstract class OperatorRegistry
         SetMax::NAME  => SetMax::class,
         Median::NAME  => Median::class,
         StandardDeviation::NAME => StandardDeviation::class,
-        Percent::NAME => Percent::class,
+        // DUP. -> StreamPercent Percent::NAME => Percent::class,
         Trend::NAME   => Trend::class,
         TrendNan::NAME => TrendNan::class,
         Predict::NAME  => Predict::class,
@@ -104,7 +104,8 @@ abstract class OperatorRegistry
         Last::NAME  => Last::class,
         First::NAME => First::class,
         Total::NAME => Total::class,
-        // TODO: Dup. StreamPercent::NAME => StreamPercent::class,
+        // TODO: Dup.
+        StreamPercent::NAME => StreamPercent::class,
         StreamPercentNan::NAME          => StreamPercentNan::class,
         LeastSquaresLineSlope::NAME     => LeastSquaresLineSlope::class,
         LeastSquaresLineIntercept::NAME => LeastSquaresLineIntercept::class,
