@@ -2,32 +2,38 @@
 
 namespace gipfl\RrdGraph\Data;
 
+use gipfl\RrdGraph\DataType\StringType;
 use gipfl\RrdGraph\Render;
 
 class RrdGraphData
 {
-    /** @var DataDefinition[] Data Definition */
+    // HINT, TODO: this class is still work in progress.
+    // Using rendered keys for normalization still needs to be finished
+    // uniqueness based on RPN will not work, as variable names might change
+
+    /** @var array<string, string> definition => alias */
     protected array $dataDefinitions = [];
 
-    /** @var DataCalculation[] Data Calculation */
+    /** @var array<string, DataDefinition|DataCalculation|VariableDefinition> */
+    protected array $data = [];
+
+    /** @var array<string, string> rpn =>  */
     protected array $dataCalculations = [];
 
-    /** @var VariableDefinition[] Variable Definitions */
+    /** @var array <string, string> Variable Definitions */
     protected array $variableDefinitions = [];
 
-    /** @var string[] */
-    protected array $usedAliases = [];
-
-    public function addDataDefinition($filename, $ds, $cf)
+    public function addDataDefinition(StringType $filename, StringType $ds, StringType $cf): string
     {
-        $filename = Render::string($filename);
-        $quotedDs = Render::string($ds);
-        $def = "$filename:$quotedDs:$cf";
+        // TODO: ConsolidationFunction enum for StringType?
+        $def =  "$filename:$ds:$cf";
         if (isset($this->dataDefinitions[$def])) {
-            return $this->dataDefinitions[$def];
+            $alias = $this->dataDefinitions[$def];
+        } else {
+            $alias = $this->getUniqueAlias('def_' . strtolower($cf->getRawString()) . '_' . $ds);
+            $this->dataDefinitions[$def] = $alias;
+            $this->data[$alias] = new DataDefinition($filename, $ds, $cf);
         }
-        $alias = $this->getUniqueAlias('def_' . strtolower($cf) . '_' . $ds);
-        $this->dataDefinitions[$def] = $alias;
 
         return $alias;
     }
@@ -62,8 +68,15 @@ class RrdGraphData
 
     public function getDefinition(string $alias): ExpressionInterface
     {
+        if (isset($this->data[$alias])) {
+            return $this->data[$alias];
+        }
+
+        throw new \OutOfBoundsException("No definition named '$alias' has been registered");
+
+        /**
         if (isset($this->dataDefinitions[$alias])) {
-            return $this->dataDefinitions[$alias];
+            return DataDefinition::fromParameters($this->dataDefinitions[$alias];
         }
         if (isset($this->dataCalculations[$alias])) {
             return $this->dataCalculations[$alias];
@@ -71,17 +84,14 @@ class RrdGraphData
         if (isset($this->variableDefinitions[$alias])) {
             return $this->variableDefinitions[$alias];
         }
-
-        throw new \OutOfBoundsException("No definition named '$alias' has been registered");
+        */
     }
 
     protected function getUniqueAlias($name): string
     {
-        while (isset($this->usedAliases[$name])) {
+        while (isset($this->data[$name])) {
             $name = $this->makeNextName($name);
         }
-
-        $this->usedAliases[$name] = true;
 
         return $name;
     }
