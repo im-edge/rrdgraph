@@ -3,10 +3,13 @@
 namespace gipfl\Tests\RrdGraph\Rpn;
 
 use gipfl\RrdGraph\GraphDefinitionParser;
+use gipfl\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
 {
+    use TestHelpers;
+
     public function testParseAndRenderCpuGraph()
     {
         $defs = "DEF:def_average_iowait='2d/07/2d07f300dbec4dc5a30caa61ae76ca0a.rrd':iowait:AVERAGE"
@@ -47,11 +50,5 @@ class ParserTest extends TestCase
             . " LINE1.5:trend_smoothed#0095BF66";
 
         $this->parseAndRender($defs);
-    }
-
-    protected function parseAndRender($defs)
-    {
-        $parser = new GraphDefinitionParser($defs);
-        $this->assertEquals($defs, (string) $parser->parse());
     }
 }
