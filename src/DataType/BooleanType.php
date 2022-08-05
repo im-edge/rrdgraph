@@ -20,6 +20,11 @@ class BooleanType implements DataTypeInterface
         return $this->value;
     }
 
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
     public function isTrue(): bool
     {
         return $this->value;
