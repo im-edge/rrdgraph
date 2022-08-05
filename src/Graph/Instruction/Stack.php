@@ -12,6 +12,12 @@ trait Stack
 {
     protected ?BooleanType $STACK = null;
 
+    public function setStack(bool $stack = true): self
+    {
+        $this->STACK = new BooleanType($stack, 'STACK');
+        return $this;
+    }
+
     public function isStack(): bool
     {
         return $this->STACK && $this->STACK->isTrue();

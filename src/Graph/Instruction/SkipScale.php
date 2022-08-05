@@ -18,4 +18,10 @@ trait SkipScale
     {
         return $this->skipscale && $this->skipscale->getValue();
     }
+
+    public function setSkipScale(bool $skipScale = true): self
+    {
+        $this->skipscale = new BooleanType($skipScale, 'skipscale');
+        return $this;
+    }
 }
