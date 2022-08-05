@@ -4,6 +4,7 @@ namespace gipfl\RrdGraph;
 
 use gipfl\RrdGraph\Data\Assignment;
 use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
+use InvalidArgumentException;
 use RuntimeException;
 
 class GraphDefinition
@@ -41,6 +42,17 @@ class GraphDefinition
         }
         $this->variableNames[$name] = $tag;
         $this->defs[$tag][$name] = $assignment;
+    }
+
+    public function getAssignment($variableName): Assignment
+    {
+        if (! isset($this->variableNames[$variableName])) {
+            throw new InvalidArgumentException("Got no such definition: '$variableName'");
+        }
+
+        $tag = $this->variableNames[$variableName];
+
+        return $this->defs[$tag][$variableName];
     }
 
     public function addGraphInstruction(GraphInstructionInterface $instruction)
