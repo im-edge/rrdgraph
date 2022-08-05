@@ -37,6 +37,7 @@ class Comment implements GraphInstructionInterface
 
     public static function fromParameters(array $parameters): Comment
     {
+        $parameters[0] = StringType::parse($parameters[0]);
         return new Comment(...$parameters);
     }
 }
