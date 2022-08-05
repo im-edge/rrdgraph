@@ -5,10 +5,13 @@ namespace gipfl\Tests\RrdGraph\Instruction;
 use gipfl\RrdGraph\Color;
 use gipfl\RrdGraph\Data\VariableName;
 use gipfl\RrdGraph\Graph\Instruction\Area;
+use gipfl\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
 class AreaTest extends TestCase
 {
+    use TestHelpers;
+
     public function testSimpleAreaRendersCorrectly()
     {
         $area = new Area(new VariableName('def1'));
@@ -69,5 +72,11 @@ class AreaTest extends TestCase
             "AREA:cdef#0095BF32::STACK:skipscale",
             (string) $area
         );
+    }
+
+    public function testCanBeParsedAndRendered()
+    {
+        $def = 'AREA:cdef#0095BF32::STACK:skipscale';
+        $this->parseAndRender($def);
     }
 }
