@@ -30,7 +30,7 @@ trait OptionalParameters
     protected function renderOptionalParameters(): string
     {
         $string = '';
-        foreach (array_keys(self::OPTIONAL_PARAMETERS) as $parameter) {
+        foreach (array_keys(static::OPTIONAL_PARAMETERS) as $parameter) {
             if ($this->$parameter !== null) {
                 $string .= Render::namedParameter($parameter, $this->$parameter);
             }
