@@ -3,25 +3,22 @@
 namespace gipfl\RrdGraph;
 
 use gipfl\RrdGraph\Data\Assignment;
-use gipfl\RrdGraph\Data\DataCalculation;
-use gipfl\RrdGraph\Data\DataDefinition;
-use gipfl\RrdGraph\Data\VariableDefinition;
 use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
 use RuntimeException;
 
 class GraphDefinition
 {
-    /** @var array [Assignment::$tag => DataCalculation[]|VariableDefinition[]|GraphInstructionInterface[]] */
+    /** @var array<string, array<string, Assignment>> */
     protected array $defs = [
-        /** @var DataDefinition[] */
+        // Assignments with DataDefinition
         Assignment::TAG_DATA_DEFINITION => [],
-        /** @var DataCalculation[] */
+        // Assignments with DataCalculation
         Assignment::TAG_DATA_CALCULATION => [],
-        /** @var VariableDefinition[] */
+        // Assignments with VariableDefinition
         Assignment::TAG_VARIABLE_DEFINITION => [],
     ];
 
-    /** @var array $variableNames = $variableName => $tag */
+    /** @var array<string, string> $variableNames = $variableName => $tag */
     protected array $variableNames = [];
 
     /** @var GraphInstructionInterface[] */
