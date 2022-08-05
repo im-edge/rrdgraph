@@ -25,10 +25,10 @@ class ParserTest extends TestCase
             . "def_average_guest,def_average_guest_nice,def_average_system,def_average_user,+,+,+,+,+,+,+,+"
             . " CDEF:trend_smoothed=total,3600,TRENDNAN"
             . " AREA:def_average_iowait#DDA0DD"
-            . " AREA:def_average_softirq#DA70D6:STACK AREA:def_average_irq#BA55D3:STACK"
-            . " AREA:def_average_nice#9932CC:STACK AREA:def_average_steal#DDA0DD:STACK"
-            . " AREA:def_average_guest#DA70D6:STACK AREA:def_average_guest_nice#BA55D3:STACK"
-            . " AREA:def_average_system#9932CC:STACK AREA:def_average_user#DDA0DD:STACK"
+            . " AREA:def_average_softirq#DA70D6::STACK AREA:def_average_irq#BA55D3::STACK"
+            . " AREA:def_average_nice#9932CC::STACK AREA:def_average_steal#DDA0DD::STACK"
+            . " AREA:def_average_guest#DA70D6::STACK AREA:def_average_guest_nice#BA55D3::STACK"
+            . " AREA:def_average_system#9932CC::STACK AREA:def_average_user#DDA0DD::STACK"
             . " LINE1.5:trend_smoothed#0095BF66";
 
         $this->parseAndRender($defs);

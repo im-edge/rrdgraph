@@ -26,7 +26,7 @@ class AreaTest extends TestCase
     {
         $area = new Area(new VariableName('def1'));
         $area->setStack();
-        $this->assertEquals('AREA:def1:STACK', $area->__toString());
+        $this->assertEquals('AREA:def1::STACK', $area->__toString());
     }
 
     public function testSkipScaleCanBeConfigured()
@@ -40,7 +40,7 @@ class AreaTest extends TestCase
     {
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
-        $this->assertEquals('AREA:def1:skipscale', $area->__toString());
+        $this->assertEquals('AREA:def1::skipscale', $area->__toString());
     }
 
     public function testSkipScaleAndStackCanBeConfiguredTogether()
@@ -57,7 +57,7 @@ class AreaTest extends TestCase
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
         $area->setStack();
-        $this->assertEquals('AREA:def1:STACK:skipscale', $area->__toString());
+        $this->assertEquals('AREA:def1::STACK:skipscale', $area->__toString());
     }
 
     public function testRendersGivenText()
@@ -66,7 +66,7 @@ class AreaTest extends TestCase
         $area->setStack();
         $area->setSkipScale();
         $this->assertEquals(
-            "AREA:cdef#0095BF32:STACK:skipscale",
+            "AREA:cdef#0095BF32::STACK:skipscale",
             (string) $area
         );
     }

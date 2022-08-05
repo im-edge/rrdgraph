@@ -2,6 +2,7 @@
 
 namespace gipfl\RrdGraph;
 
+use gipfl\RrdGraph\DataType\BooleanType;
 use gipfl\RrdGraph\DataType\DataTypeInterface;
 use InvalidArgumentException;
 use function addcslashes;
@@ -25,17 +26,18 @@ final class Render
         return "'" . addcslashes($string, "':") . "'";
     }
 
-    public static function optionalParameter(?DataTypeInterface $parameter): string
+    public static function optionalParameter(?DataTypeInterface $parameter, $followingFlags = []): string
     {
         if ($parameter === null) {
-            return '';
+            return self::emptyDependingOnFollowingFlags($followingFlags);
         }
         $string = (string) $parameter;
         if (strlen($string) > 0) {
             return ":$parameter";
         }
 
-        return '';
+
+        return self::emptyDependingOnFollowingFlags($followingFlags);
     }
 
     public static function optionalNamedParameter(string $parameter, $value): string
@@ -72,5 +74,17 @@ final class Render
         }
 
         throw new InvalidArgumentException("Number expected, got $number");
+    }
+
+    protected static function emptyDependingOnFollowingFlags($followingFlags = []): string
+    {
+        /** @var ?BooleanType $boolean */
+        foreach ($followingFlags as $boolean) {
+            if ($boolean !== null && $boolean->isTrue()) {
+                return ':';
+            }
+        }
+
+        return '';
     }
 }

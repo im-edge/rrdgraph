@@ -51,7 +51,7 @@ class Area extends DefinitionBasedGraphInstruction
             . $this->definition
             . $this->color
             . $this->color2
-            . Render::optionalParameter($this->legend)
+            . Render::optionalParameter($this->legend, [$this->STACK, $this->skipscale])
             . Render::optionalParameter($this->STACK) // Named
             . Render::optionalParameter($this->skipscale)
             . Render::optionalNamedParameter('gradheight', $this->gradheight)
