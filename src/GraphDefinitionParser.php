@@ -99,6 +99,12 @@ class GraphDefinitionParser
         $stringContext = false;
         while (null !== ($current = $this->nextCharacter())) {
             $length++;
+            if ($current === self::FIELD_SEPARATOR) {
+                $start = $this->position + 1;
+                $length = 0;
+                yield '';
+                continue;
+            }
             if ($current === self::ESCAPE) {
                 $this->requireNextCharacter();
                 $length++;
