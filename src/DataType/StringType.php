@@ -36,7 +36,8 @@ class StringType implements DataTypeInterface
     public static function parse(string $string): StringType
     {
         if (strlen($string) > 1) {
-            $string = stripcslashes($string);
+            // Hint: stripcslashes() would destroy \l and similar
+            $string = preg_replace('/\\\[:\']/', '\1', $string);
             if ($string[0] === "'" && $string[-1] === "'") {
                 $string = substr($string, 1, -1);
             } elseif ($string[0] === '"' && $string[-1] === '"') {
