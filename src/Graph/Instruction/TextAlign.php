@@ -3,7 +3,6 @@
 namespace gipfl\RrdGraph\Graph\Instruction;
 
 use gipfl\RrdGraph\DataType\AlignmentEnum;
-use Svg\Tag\Text;
 
 /**
  * From `man rrdgraph_graph`:
