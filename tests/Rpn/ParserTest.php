@@ -10,6 +10,29 @@ class ParserTest extends TestCase
 {
     use TestHelpers;
 
+    public function testParsesAndRendersAStackedCpuGraph()
+    {
+        $defs = "DEF:def_average_rta=19/8b/198b6fbaec8a4b2b8809a3b625bf1752.rrd:rta:AVERAGE"
+            . " DEF:def_min_rta=19/8b/198b6fbaec8a4b2b8809a3b625bf1752.rrd:rta:MIN"
+            . " DEF:def_max_rta=19/8b/198b6fbaec8a4b2b8809a3b625bf1752.rrd:rta:MAX"
+            . " CDEF:cdef__1=def_average_rta,0,*"
+            . " CDEF:cdef__2=def_average_rta,def_min_rta,-,10,/"
+            . " CDEF:cdef__3=def_max_rta,def_average_rta,-,10,/"
+            . " VDEF:vdef__1=def_max_rta,100,PERCENT LINE1:cdef__1#00000000"
+            . " AREA:def_min_rta::skipscale AREA:cdef__2#0095BF0a::STACK"
+            . " AREA:cdef__2#0095BF14::STACK AREA:cdef__2#0095BF1e::STACK"
+            . " AREA:cdef__2#0095BF28::STACK AREA:cdef__2#0095BF32::STACK"
+            . " AREA:cdef__2#0095BF3c::STACK AREA:cdef__2#0095BF46::STACK"
+            . " AREA:cdef__2#0095BF50::STACK AREA:cdef__2#0095BF5a::STACK"
+            . " AREA:cdef__2#0095BF64::STACK AREA:cdef__3#0095BF64::STACK:skipscale"
+            . " AREA:cdef__3#0095BF5a::STACK:skipscale AREA:cdef__3#0095BF50::STACK:skipscale"
+            . " AREA:cdef__3#0095BF46::STACK:skipscale AREA:cdef__3#0095BF3c::STACK:skipscale"
+            . " AREA:cdef__3#0095BF32::STACK:skipscale AREA:cdef__3#0095BF28::STACK:skipscale"
+            . " AREA:cdef__3#0095BF1e::STACK:skipscale AREA:cdef__3#0095BF14::STACK:skipscale"
+            . " AREA:cdef__3#0095BF0a::STACK:skipscale LINE1:def_average_rta#0095BF LINE1:vdef__1";
+
+        $this->parseAndRender($defs);
+    }
     public function testParseAndRenderCpuGraph()
     {
         $defs = "DEF:def_average_iowait=2d/07/2d07f300dbec4dc5a30caa61ae76ca0a.rrd:iowait:AVERAGE"
