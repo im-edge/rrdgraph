@@ -104,6 +104,10 @@ class PrintGraphInstruction implements GraphInstructionInterface
 
     public static function fromParameters(array $parameters)
     {
-        return new static(...$parameters);
+        // TODO: Set optional flags. We need a better abstraction for this
+        return new static(
+            new VariableName(array_shift($parameters)),
+            StringType::parse(array_shift($parameters))
+        );
     }
 }
