@@ -16,7 +16,8 @@ use function substr;
 class GraphDefinitionParser
 {
     const FIELD_SEPARATOR = ':';
-    const STRING_ENCLOSURE = "'";
+    const STRING_SINGLE_QUOTE = "'";
+    const STRING_DOUBLE_QUOTE = '"';
     const ESCAPE = '\\';
     protected string $string;
     protected int $position;
@@ -110,8 +111,12 @@ class GraphDefinitionParser
                 $length++;
                 continue;
             }
-            if ($current === self::STRING_ENCLOSURE) {
-                $stringContext = !$stringContext;
+            if ($current === self::STRING_SINGLE_QUOTE || $current === self::STRING_DOUBLE_QUOTE) {
+                if ($current === $stringContext) {
+                    $stringContext = false;
+                } else {
+                    $stringContext = $current;
+                }
             }
             // TODO: we support unescaped colons in a string, should check whether rrdtool also does so
             if (! $stringContext) {
