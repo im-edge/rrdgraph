@@ -27,7 +27,7 @@ class IntegerType implements DataTypeInterface
 
     public static function isValid(string $string): bool
     {
-        return preg_match(self::REGEXP, $string);
+        return preg_match(self::REGEXP, $string) > 0;
     }
 
     public static function parse(string $string): IntegerType
