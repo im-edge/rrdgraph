@@ -25,7 +25,6 @@ class Area extends DefinitionBasedGraphInstruction
 {
     use SkipScale;
     use Stack;
-    use OptionalParameters;
 
     const TAG = 'AREA';
     const OPTIONAL_PARAMETERS = [
