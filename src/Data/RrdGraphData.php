@@ -8,6 +8,7 @@ use gipfl\RrdGraph\Render;
 class RrdGraphData
 {
     // HINT, TODO: this class is still work in progress.
+    // HINT: Is it obsolete, since there is now GraphDefinition?
     // Using rendered keys for normalization still needs to be finished
     // uniqueness based on RPN will not work, as variable names might change
 
