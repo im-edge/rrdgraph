@@ -91,7 +91,7 @@ class PrintGraphInstruction implements GraphInstructionInterface
 
     public function __toString(): string
     {
-        return self::TAG
+        return static::TAG
             . ':'
             . $this->getVariableName()
             . ':'
