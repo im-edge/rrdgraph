@@ -106,22 +106,4 @@ class ParserTest extends TestCase
 
         $this->parseAndRender($defs);
     }
-
-    protected function testParsesAndRendersRouterExampleWithStartAndEnd()
-    {
-        $defs = 'DEF:ds0=router.rrd:ds0:AVERAGE'
-            . ' DEF:ds0weekly=router.rrd:ds0:AVERAGE:step=7200'
-            . ' DEF:ds0weekly=router.rrd:ds0:AVERAGE:start=end-1h'
-            . ' DEF:ds0weekly=router.rrd:ds0:AVERAGE:start=11\\:00:end=start+1h'
-            . ' DEF:ds0weekly=router.rrd:ds0:AVERAGE:daemon=collect1.example.com'
-
-            . " AREA:def_average_iowait#DDA0DD"
-            . " AREA:def_average_softirq#DA70D6:STACK AREA:def_average_irq#BA55D3:STACK"
-            . " AREA:def_average_nice#9932CC:STACK AREA:def_average_steal#DDA0DD:STACK"
-            . " AREA:def_average_guest#DA70D6:STACK AREA:def_average_guest_nice#BA55D3:STACK"
-            . " AREA:def_average_system#9932CC:STACK AREA:def_average_user#DDA0DD:STACK"
-            . " LINE1.5:trend_smoothed#0095BF66";
-
-        $this->parseAndRender($defs);
-    }
 }
