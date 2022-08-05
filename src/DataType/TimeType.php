@@ -10,6 +10,6 @@ abstract class TimeType implements TimeInterface
             return new SecondsSinceEpoch((int) $string);
         }
 
-        return new AtStyleTime($string);
+        return AtStyleTime::parse($string);
     }
 }

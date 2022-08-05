@@ -12,8 +12,13 @@ class AtStyleTime extends TimeType
         $this->time = $time;
     }
 
+    public static function parse(string $string): AtStyleTime
+    {
+        return new AtStyleTime(stripcslashes($string));
+    }
+
     public function __toString()
     {
-        return $this->time;
+        return addcslashes($this->time, "':");
     }
 }
