@@ -34,6 +34,56 @@ class ParserTest extends TestCase
         $this->parseAndRender($defs);
     }
 
+    public function testParsesAndRendersRrdGraphExampleWithMultipleResolutions()
+    {
+        $defs = 'DEF:ds0a=/home/rrdtool/data/router1.rrd:ds0:AVERAGE'
+            . ' DEF:ds0b=/home/rrdtool/data/router1.rrd:ds0:AVERAGE:step=1800'
+            . ' DEF:ds0c=/home/rrdtool/data/router1.rrd:ds0:AVERAGE:step=7200'
+            . " LINE1:ds0a#0000FF:'default resolution\l'"
+            . " LINE1:ds0b#00CCFF:'resolution 1800 seconds per interval\l'"
+            . " LINE1:ds0c#FF00FF:'resolution 7200 seconds per interval\l'";
+
+        $this->parseAndRender($defs);
+    }
+
+    public function testParsesAndRendersNicelyFormattedLegendSection()
+    {
+        $defs = 'DEF:ds0=/home/rrdtool/data/router1.rrd:ds0:AVERAGE'
+            . ' DEF:ds1=/home/rrdtool/data/router1.rrd:ds1:AVERAGE'
+
+            // consolidation occurs here
+            . ' CDEF:ds0bits=ds0,8,*'
+            . ' CDEF:ds1bits=ds1,8,*'
+
+            . ' VDEF:ds0max=ds0,MAXIMUM'
+            . ' VDEF:ds0avg=ds0,AVERAGE'
+            . ' VDEF:ds0min=ds0,MINIMUM'
+            . ' VDEF:ds0pct=ds0,95,PERCENT'
+            . ' VDEF:ds1max=ds1,MAXIMUM'
+            . ' VDEF:ds1avg=ds1,AVERAGE'
+            . ' VDEF:ds1min=ds1,MINIMUM'
+            . ' VDEF:ds1pct=ds1,95,PERCENT'
+            // 10 spaces to move text to the right
+            . " COMMENT:'          '"
+            // the column titles have to be as wide as the columns
+            . " COMMENT:'Maximum    '"
+            . " COMMENT:'Average    '"
+            . " COMMENT:'Minimum    '"
+            . " COMMENT:'95th percentile\l'"
+            . " AREA:ds0bits#00C000:'Inbound '"
+            . " GPRINT:ds0max:'%6.2lf %Sbps'"
+            . " GPRINT:ds0avg:'%6.2lf %Sbps'"
+            . " GPRINT:ds0min:'%6.2lf %Sbps'"
+            . " GPRINT:ds0pct:'%6.2lf %Sbps\l'"
+            . " LINE1:ds1bits#0000FF:Outbound"
+            . " GPRINT:ds1max:'%6.2lf %Sbps'"
+            . " GPRINT:ds1avg:'%6.2lf %Sbps'"
+            . " GPRINT:ds1min:'%6.2lf %Sbps'"
+            . " GPRINT:ds1pct:'%6.2lf %Sbps\l'";
+
+        $this->parseAndRender($defs);
+    }
+
     protected function testParsesAndRendersRouterExampleWithStartAndEnd()
     {
         $defs = 'DEF:ds0=router.rrd:ds0:AVERAGE'
