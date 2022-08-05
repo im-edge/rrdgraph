@@ -3,7 +3,6 @@
 namespace gipfl\RrdGraph\DataType;
 
 use function addcslashes;
-use function stripcslashes;
 use function strlen;
 
 class StringType implements DataTypeInterface
