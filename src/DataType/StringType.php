@@ -36,7 +36,11 @@ class StringType implements DataTypeInterface
     {
         if (strlen($string) > 1) {
             // Hint: stripcslashes() would destroy \l and similar
-            $string = preg_replace('/\\\[:\'"]/', '\1', $string);
+            $string = strtr($string, [
+                '\\:' => ':',
+                "\\'" => "'",
+                '\\"' => '"',
+            ]);
             if ($string[0] === "'" && $string[-1] === "'") {
                 $string = substr($string, 1, -1);
             } elseif ($string[0] === '"' && $string[-1] === '"') {
