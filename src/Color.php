@@ -64,6 +64,21 @@ class Color
         return $this->hexCode === null;
     }
 
+    public function toRgba(): ?string
+    {
+        if ($this->hexCode === null) {
+            return null;
+        }
+
+        return sprintf(
+            'rgba(%d, %d, %d, %.3f)',
+            hexdec(substr($this->hexCode, 0, 2)),
+            hexdec(substr($this->hexCode, 2, 2)),
+            hexdec(substr($this->hexCode, 4, 2)),
+            $this->alpha === null ? 1 : (hexdec($this->alpha) / 255),
+        );
+    }
+
     /**
      * @param string|Color|null $color
      * @return Color
