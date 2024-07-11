@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class RrdGraphRpnDocumentationExamplesTest extends TestCase
 {
-    public function testParseAndRenderBooleanOperators()
+    public function testParseAndRenderBooleanOperators(): void
     {
         $this->runSamples([
             'A,B,C,IF',
@@ -22,7 +22,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderComparisonOperators()
+    public function testParseAndRenderComparisonOperators(): void
     {
         $this->runSamples([
             '1,0,MIN',
@@ -33,7 +33,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderArithmeticOperators()
+    public function testParseAndRenderArithmeticOperators(): void
     {
         $this->runSamples([
             'mydata,8,*',
@@ -59,7 +59,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderSetOperations()
+    public function testParseAndRenderSetOperations(): void
     {
         $this->runSamples([
             '4,3,22.1,1,4,SORT',
@@ -95,7 +95,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
     }
 
 
-    public function testParseAndRenderSpecialValues()
+    public function testParseAndRenderSpecialValues(): void
     {
         $this->runSamples([
             'UNKN',
@@ -108,7 +108,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderTimeValues()
+    public function testParseAndRenderTimeValues(): void
     {
         $this->runSamples([
             'NOW',
@@ -124,7 +124,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderStackOperators()
+    public function testParseAndRenderStackOperators(): void
     {
         $this->runSamples([
             // TODO: Processing the stack directly -> how to serialize them correctly?
@@ -141,7 +141,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderVariableBasedOperators()
+    public function testParseAndRenderVariableBasedOperators(): void
     {
         $this->runSamples([
             'mydata,AVERAGE',
@@ -160,7 +160,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    public function testParseAndRenderCdefTutorialExamples()
+    public function testParseAndRenderCdefTutorialExamples(): void
     {
         $this->runSamples([
             // From doc/cdeftutorial.pod:
@@ -193,7 +193,10 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
         ]);
     }
 
-    protected function runSamples($samples)
+    /**
+     * @param string[] $samples
+     */
+    protected function runSamples(array $samples): void
     {
         foreach ($samples as $sample) {
             $this->assertEquals($sample, (string) RpnExpression::parse($sample));

@@ -43,6 +43,9 @@ class Assignment
         return static::fromAssignment($type, iterator_to_array($assignment));
     }
 
+    /**
+     * @param array<int, mixed> $assignment
+     */
     public static function fromAssignment(string $tag, array $assignment): Assignment
     {
         static::assertValidTag($tag);
@@ -82,14 +85,14 @@ class Assignment
         throw new RuntimeException(sprintf('%s Assignment has no RPN expression', $this->tag));
     }
 
-    public static function assertValidTag($tag)
+    public static function assertValidTag(string $tag): void
     {
         if (!self::isValidTag($tag)) {
             throw new OutOfBoundsException("'$tag' is not a valid tag for data definition assignments");
         }
     }
 
-    public static function isValidTag($tag): bool
+    public static function isValidTag(string $tag): bool
     {
         return in_array($tag, self::ALLOWED_TAGS);
     }
