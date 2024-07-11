@@ -42,7 +42,7 @@ final class Render
 
     public static function optionalNamedParameter(string $parameter, $value): string
     {
-        if ($value !== null && strlen($value)) {
+        if ($value !== null && strlen((string) $value)) {
             return ":$parameter=$value";
         } else {
             return '';
