@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
 /**
  * Pop two elements (count,percent) from the stack. Now pop count element, order

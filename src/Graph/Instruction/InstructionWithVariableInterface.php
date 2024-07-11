@@ -1,6 +1,6 @@
 <?php
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
 interface InstructionWithVariableInterface
 {

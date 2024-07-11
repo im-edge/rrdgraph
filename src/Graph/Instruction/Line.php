@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\DataType\BooleanType;
-use gipfl\RrdGraph\DataType\IntegerType;
-use gipfl\RrdGraph\Render;
+use IMEdge\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\Render;
 
 /**
  * man rrdgraph_graph

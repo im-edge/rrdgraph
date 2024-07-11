@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
 /**
  * NAN-safe addition. If one parameter is NAN/UNKNOWN it'll be treated as zero.

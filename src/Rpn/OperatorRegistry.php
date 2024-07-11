@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
-use gipfl\RrdGraph\ClassRegistry;
+use IMEdge\RrdGraph\ClassRegistry;
 
 abstract class OperatorRegistry
 {

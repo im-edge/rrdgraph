@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\Color;
-use gipfl\RrdGraph\DataType\BooleanType;
-use gipfl\RrdGraph\DataType\FloatType;
-use gipfl\RrdGraph\DataType\IntegerType;
-use gipfl\RrdGraph\Render;
+use IMEdge\RrdGraph\Color;
+use IMEdge\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\FloatType;
+use IMEdge\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\Render;
 
 /**
  * Draw a filled area

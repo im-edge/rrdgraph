@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
 /**
  * This should follow a DEF or CDEF vname. The vname is popped, another number

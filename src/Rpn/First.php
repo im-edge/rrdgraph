@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
 /**
  * Return the first non-nan or infinite value for the selected data stream,

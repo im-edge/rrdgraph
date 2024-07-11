@@ -1,8 +1,8 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Rpn;
+namespace IMEdge\Tests\RrdGraph\Rpn;
 
-use gipfl\RrdGraph\Rpn\RpnExpression;
+use IMEdge\RrdGraph\Rpn\RpnExpression;
 use PHPUnit\Framework\TestCase;
 
 class RrdGraphRpnDocumentationExamplesTest extends TestCase

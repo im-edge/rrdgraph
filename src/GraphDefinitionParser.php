@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph;
+namespace IMEdge\RrdGraph;
 
 use Generator;
-use gipfl\RrdGraph\Data\Assignment;
-use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
-use gipfl\RrdGraph\Graph\Instruction\InstructionRegistry;
-use gipfl\RrdGraph\Graph\Instruction\Line;
+use IMEdge\RrdGraph\Data\Assignment;
+use IMEdge\RrdGraph\Graph\Instruction\GraphInstructionInterface;
+use IMEdge\RrdGraph\Graph\Instruction\InstructionRegistry;
+use IMEdge\RrdGraph\Graph\Instruction\Line;
 use OutOfBoundsException;
 use RuntimeException;
 use function preg_match;

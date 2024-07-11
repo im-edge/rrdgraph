@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\Data\VariableName;
-use gipfl\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\DataType\IntegerType;
 
 /**
  * Graph the following elements with a specified time offset

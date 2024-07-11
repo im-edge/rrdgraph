@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\Color;
-use gipfl\RrdGraph\Data\VariableName;
-use gipfl\RrdGraph\DataType\BooleanType;
-use gipfl\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\Color;
+use IMEdge\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\StringType;
 use InvalidArgumentException;
 use RuntimeException;
 

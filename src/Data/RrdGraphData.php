@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\Render;
+use IMEdge\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\Render;
 
 class RrdGraphData
 {

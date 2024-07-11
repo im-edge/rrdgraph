@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
 interface DataDefinitionInterface extends ExpressionInterface
 {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph;
+namespace IMEdge\RrdGraph;
 
-use gipfl\RrdGraph\DataType\DataTypeInterface;
+use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use RuntimeException;
 use function array_keys;
 use function sprintf;

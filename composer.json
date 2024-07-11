@@ -1,5 +1,5 @@
 {
-    "name": "gipfl/rrdgraph",
+    "name": "imedge/rrdgraph",
     "description": "RRDtool Graphing definition parser and renderer",
     "type": "library",
     "license": "MIT",
@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "gipfl\\RrdGraph\\": "src/"
+            "IMEdge\\RrdGraph\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "gipfl\\Tests\\RrdGraph\\": "tests/"
+            "IMEdge\\Tests\\RrdGraph\\": "tests/"
         }
     },
     "require": {

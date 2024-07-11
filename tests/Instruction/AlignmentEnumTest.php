@@ -1,8 +1,8 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Instruction;
+namespace IMEdge\Tests\RrdGraph\Instruction;
 
-use gipfl\RrdGraph\DataType\AlignmentEnum;
+use IMEdge\RrdGraph\DataType\AlignmentEnum;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\BooleanType;
 
 /**
  * If the optional STACK modifier is used, this line/area is stacked on top of

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
 /**
  * Create a new in-memory set of (transformed) data points

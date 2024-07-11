@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph;
+namespace IMEdge\RrdGraph;
 
-use gipfl\RrdGraph\DataType\BooleanType;
-use gipfl\RrdGraph\DataType\DataTypeInterface;
+use IMEdge\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use InvalidArgumentException;
 use function addcslashes;
 use function ctype_digit;

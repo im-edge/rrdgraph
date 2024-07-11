@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\GraphDefinitionParser;
-use gipfl\RrdGraph\ParseUtils;
-use gipfl\RrdGraph\Rpn\RpnExpression;
+use IMEdge\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\GraphDefinitionParser;
+use IMEdge\RrdGraph\ParseUtils;
+use IMEdge\RrdGraph\Rpn\RpnExpression;
 use OutOfBoundsException;
 use RuntimeException;
 

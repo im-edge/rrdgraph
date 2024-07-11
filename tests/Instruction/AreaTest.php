@@ -1,12 +1,12 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Instruction;
+namespace IMEdge\Tests\RrdGraph\Instruction;
 
-use gipfl\RrdGraph\Color;
-use gipfl\RrdGraph\Data\VariableName;
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\Graph\Instruction\Area;
-use gipfl\Tests\RrdGraph\TestHelpers;
+use IMEdge\RrdGraph\Color;
+use IMEdge\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\Graph\Instruction\Area;
+use IMEdge\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
 class AreaTest extends TestCase

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Rpn;
+namespace IMEdge\RrdGraph\Rpn;
 
-use gipfl\RrdGraph\Data\ExpressionInterface;
-use gipfl\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\Data\ExpressionInterface;
+use IMEdge\RrdGraph\Data\VariableName;
 use InvalidArgumentException;
 use RuntimeException;
 

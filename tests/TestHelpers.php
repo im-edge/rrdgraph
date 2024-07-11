@@ -1,8 +1,8 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph;
+namespace IMEdge\Tests\RrdGraph;
 
-use gipfl\RrdGraph\GraphDefinitionParser;
+use IMEdge\RrdGraph\GraphDefinitionParser;
 
 trait TestHelpers
 {

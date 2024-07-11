@@ -1,14 +1,14 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Data;
+namespace IMEdge\Tests\RrdGraph\Data;
 
-use gipfl\RrdGraph\Data\Assignment;
-use gipfl\RrdGraph\Data\VariableName;
-use gipfl\RrdGraph\DataType\IntegerType;
-use gipfl\RrdGraph\Rpn\Add;
-use gipfl\RrdGraph\Rpn\Multiply;
-use gipfl\RrdGraph\Rpn\RpnExpression;
-use gipfl\Tests\RrdGraph\TestHelpers;
+use IMEdge\RrdGraph\Data\Assignment;
+use IMEdge\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\Rpn\Add;
+use IMEdge\RrdGraph\Rpn\Multiply;
+use IMEdge\RrdGraph\Rpn\RpnExpression;
+use IMEdge\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
 class AssignmentTest extends TestCase

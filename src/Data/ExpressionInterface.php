@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
-use gipfl\RrdGraph\InstructionInterface;
+use IMEdge\RrdGraph\InstructionInterface;
 
 interface ExpressionInterface extends InstructionInterface
 {

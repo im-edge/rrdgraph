@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\BooleanType;
 
 /**
  * Normally the graphing function makes sure that the entire LINE or AREA

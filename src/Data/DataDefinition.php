@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
-use gipfl\RrdGraph\DataType\IntegerType;
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\DataType\TimeInterface;
-use gipfl\RrdGraph\DataType\TimeType;
-use gipfl\RrdGraph\OptionalParameters;
+use IMEdge\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\DataType\TimeInterface;
+use IMEdge\RrdGraph\DataType\TimeType;
+use IMEdge\RrdGraph\OptionalParameters;
 use InvalidArgumentException;
 use function sprintf;
 

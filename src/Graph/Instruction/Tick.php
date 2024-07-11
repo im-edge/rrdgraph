@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\DataType\FloatType;
-use gipfl\RrdGraph\DataType\StringType;
-use gipfl\RrdGraph\Render;
+use IMEdge\RrdGraph\DataType\FloatType;
+use IMEdge\RrdGraph\DataType\StringType;
+use IMEdge\RrdGraph\Render;
 
 /**
  * Plot tick marks

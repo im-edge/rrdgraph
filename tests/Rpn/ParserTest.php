@@ -1,9 +1,9 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Rpn;
+namespace IMEdge\Tests\RrdGraph\Rpn;
 
-use gipfl\RrdGraph\GraphDefinitionParser;
-use gipfl\Tests\RrdGraph\TestHelpers;
+use IMEdge\RrdGraph\GraphDefinitionParser;
+use IMEdge\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase

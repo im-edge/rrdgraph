@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph;
+namespace IMEdge\RrdGraph;
 
-use gipfl\RrdGraph\Data\Assignment;
-use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
-use gipfl\RrdGraph\Graph\Instruction\InstructionWithVariableInterface;
-use gipfl\RrdGraph\Rpn\RpnExpression;
+use IMEdge\RrdGraph\Data\Assignment;
+use IMEdge\RrdGraph\Graph\Instruction\GraphInstructionInterface;
+use IMEdge\RrdGraph\Graph\Instruction\InstructionWithVariableInterface;
+use IMEdge\RrdGraph\Rpn\RpnExpression;
 use InvalidArgumentException;
 use RuntimeException;
 

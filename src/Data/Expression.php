@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Data;
+namespace IMEdge\RrdGraph\Data;
 
-use gipfl\RrdGraph\Rpn\RpnExpression;
+use IMEdge\RrdGraph\Rpn\RpnExpression;
 
 /**
  * Either a CDEF or a VDEF

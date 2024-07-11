@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace gipfl\RrdGraph\Graph\Instruction;
+namespace IMEdge\RrdGraph\Graph\Instruction;
 
-use gipfl\RrdGraph\Render;
+use IMEdge\RrdGraph\Render;
 
 /**
  * The dashes modifier enables dashed line style. Without any further

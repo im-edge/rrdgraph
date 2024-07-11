@@ -1,8 +1,8 @@
 <?php
 
-namespace gipfl\Tests\RrdGraph\Data;
+namespace IMEdge\Tests\RrdGraph\Data;
 
-use gipfl\RrdGraph\Data\Assignment;
+use IMEdge\RrdGraph\Data\Assignment;
 use PHPUnit\Framework\TestCase;
 
 class DefTest extends TestCase
