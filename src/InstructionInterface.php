@@ -6,9 +6,8 @@ interface InstructionInterface
 {
     /**
      * @param array $parameters
-     * @return static
+     * @return static|self -> we do not (yet) require PHP8
      */
-    #[\ReturnTypeWillChange]
-    public static function fromParameters(array $parameters);
+    public static function fromParameters(array $parameters): self;
     public function __toString(): string;
 }

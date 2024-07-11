@@ -6,5 +6,5 @@ use gipfl\RrdGraph\InstructionInterface;
 
 interface GraphInstructionInterface extends InstructionInterface
 {
-    public static function fromParameters(array $parameters);
+    public static function fromParameters(array $parameters): self;
 }

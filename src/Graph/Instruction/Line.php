@@ -19,6 +19,8 @@ use gipfl\RrdGraph\Render;
  * --------
  * LINE[width]:value[#color][:[legend][:STACK][:skipscale]
  *     [:dashes[=on_s[,off_s[,on_s,off_s]...]][:dash-offset=offset]]]
+ *
+ * @method static Line fromParameters(array $parameters)()
  */
 class Line extends DefinitionBasedGraphInstruction
 {

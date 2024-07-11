@@ -57,7 +57,7 @@ class DataDefinition implements ExpressionInterface
     {
         static::assertRequiredParameterCount($parameters);
 
-        return new static(
+        return new DataDefinition(
             StringType::parse(array_shift($parameters)),
             StringType::parse(array_shift($parameters)),
             StringType::parse(array_shift($parameters))
@@ -78,8 +78,9 @@ class DataDefinition implements ExpressionInterface
 
     public static function fromParameters(array $parameters): DataDefinition
     {
-        $self = static::fromRequiredParameters($parameters);
+        $self = DataDefinition::fromRequiredParameters($parameters);
         $self->setOptionalParameters($parameters);
+
         return $self;
     }
 

@@ -20,6 +20,8 @@ use gipfl\RrdGraph\Render;
  * --------
  * AREA:value[#color][:[legend][:STACK][:skipscale]]
  * AREA:value[#color[#color2]][:[legend][:STACK][:skipscale][:gradheight=y]
+ *
+ * @method static Area fromParameters(array $parameters)()
  */
 class Area extends DefinitionBasedGraphInstruction
 {

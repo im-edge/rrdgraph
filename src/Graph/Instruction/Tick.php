@@ -18,6 +18,8 @@ use gipfl\RrdGraph\Render;
  * Synopsis
  * --------
  * TICK:vname#rrggbb[aa][:fraction[:legend]]
+ *
+ * @method static Tick fromParameters(array $parameters)()
  */
 class Tick extends DefinitionBasedGraphInstruction
 {
