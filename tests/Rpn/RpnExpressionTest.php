@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class RpnExpressionTest extends TestCase
 {
-    public function testExpressionCanBeParsedAndRendered()
+    public function testExpressionCanBeParsedAndRendered(): void
     {
         $def = 'def_average_iowait,def_average_softirq,def_average_irq,def_average_nice,def_average_steal,'
             . 'def_average_guest,def_average_guest_nice,def_average_system,def_average_user,+,+,+,+,+,+,+,+';
@@ -16,7 +16,7 @@ class RpnExpressionTest extends TestCase
         $this->assertEquals($def, (string) $expression);
     }
 
-    public function testExpressionVariableCanBeRenamed()
+    public function testExpressionVariableCanBeRenamed(): void
     {
         $def = 'def_average_iowait,def_average_softirq,def_average_irq,def_average_nice,def_average_steal,'
             . 'def_average_guest,def_average_guest_nice,def_average_system,def_average_user,+,+,+,+,+,+,+,+';

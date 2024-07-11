@@ -10,7 +10,7 @@ class ParserTest extends TestCase
 {
     use TestHelpers;
 
-    public function testParsesAndRendersAStackedCpuGraph()
+    public function testParsesAndRendersAStackedCpuGraph(): void
     {
         $defs = "DEF:def_average_rta=19/8b/198b6fbaec8a4b2b8809a3b625bf1752.rrd:rta:AVERAGE"
             . " DEF:def_min_rta=19/8b/198b6fbaec8a4b2b8809a3b625bf1752.rrd:rta:MIN"
@@ -33,7 +33,7 @@ class ParserTest extends TestCase
 
         $this->parseAndRender($defs);
     }
-    public function testParseAndRenderCpuGraph()
+    public function testParseAndRenderCpuGraph(): void
     {
         $defs = "DEF:def_average_iowait=2d/07/2d07f300dbec4dc5a30caa61ae76ca0a.rrd:iowait:AVERAGE"
             . " DEF:def_average_softirq=2d/07/2d07f300dbec4dc5a30caa61ae76ca0a.rrd:softirq:AVERAGE"
@@ -57,7 +57,7 @@ class ParserTest extends TestCase
         $this->parseAndRender($defs);
     }
 
-    public function testParsesAndRendersRrdGraphExampleWithMultipleResolutions()
+    public function testParsesAndRendersRrdGraphExampleWithMultipleResolutions(): void
     {
         $defs = 'DEF:ds0a=/home/rrdtool/data/router1.rrd:ds0:AVERAGE'
             . ' DEF:ds0b=/home/rrdtool/data/router1.rrd:ds0:AVERAGE:step=1800'
@@ -69,7 +69,7 @@ class ParserTest extends TestCase
         $this->parseAndRender($defs);
     }
 
-    public function testParsesAndRendersNicelyFormattedLegendSection()
+    public function testParsesAndRendersNicelyFormattedLegendSection(): void
     {
         $defs = 'DEF:ds0=/home/rrdtool/data/router1.rrd:ds0:AVERAGE'
             . ' DEF:ds1=/home/rrdtool/data/router1.rrd:ds1:AVERAGE'
@@ -107,7 +107,7 @@ class ParserTest extends TestCase
         $this->parseAndRender($defs);
     }
 
-    protected function testParsesAndRendersOffsettingALineOnTheYAxis()
+    protected function testParsesAndRendersOffsettingALineOnTheYAxis(): void
     {
         // Depending on your needs you can do this in two ways:
         $defs = 'DEF:mydata=my.rrd:ds:AVERAGE'
@@ -127,7 +127,7 @@ class ParserTest extends TestCase
         $this->parseAndRender($defs, $expected);
     }
 
-    public function testParsesAndRendersAberrantBehaviourDetection()
+    public function testParsesAndRendersAberrantBehaviourDetection(): void
     {
         $defs = 'DEF:obs=monitor.rrd:ifOutOctets:AVERAGE'
             . ' DEF:pred=monitor.rrd:ifOutOctets:HWPREDICT'

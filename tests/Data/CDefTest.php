@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class CDefTest extends TestCase
 {
-    public function testParsesAndRendersCdefString()
+    public function testParsesAndRendersCdefString(): void
     {
         $in = "CDEF:'trend_smoothed'=total,3600,TRENDNAN";
         $out = "CDEF:trend_smoothed=total,3600,TRENDNAN";

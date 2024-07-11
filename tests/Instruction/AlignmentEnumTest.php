@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class AlignmentEnumTest extends TestCase
 {
-    public function testAcceptsValidAlignment()
+    public function testAcceptsValidAlignment(): void
     {
         AlignmentEnum::assertValid('left');
         AlignmentEnum::assertValid('right');
@@ -17,7 +17,7 @@ class AlignmentEnumTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function testFailsWithInvalidAlignment()
+    public function testFailsWithInvalidAlignment(): void
     {
         $this->expectException(InvalidArgumentException::class);
         AlignmentEnum::assertValid('leftt');

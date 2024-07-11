@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CommentTest extends TestCase
 {
-    public function testRendersGivenText()
+    public function testRendersGivenText(): void
     {
         $this->assertEquals("COMMENT:'Some text'", (string) new Comment(new StringType('Some text')));
     }

@@ -15,13 +15,13 @@ class AssignmentTest extends TestCase
 {
     use TestHelpers;
 
-    public function testDefineAndRenderMultiplication()
+    public function testDefineAndRenderMultiplication(): void
     {
         $def = new Assignment('DEF', new VariableName('result'), new RpnExpression(new Multiply(), [5, 6]));
         $this->assertEquals('DEF:result=6,5,*', (string) $def);
     }
 
-    public function testDefineAndRenderNestedExpressionWithRenamedVariables()
+    public function testDefineAndRenderNestedExpressionWithRenamedVariables(): void
     {
         $def = new Assignment('DEF', new VariableName('uptime'), new RpnExpression(new Multiply(), [
             new RpnExpression(new Add(), [
@@ -35,25 +35,25 @@ class AssignmentTest extends TestCase
         $this->assertEquals('DEF:uptime=changed,sub,10,+,*', (string) $def);
     }
 
-    public function testVariableDefinitionCanBeParsedAndRendered()
+    public function testVariableDefinitionCanBeParsedAndRendered(): void
     {
         $def = 'VDEF:avg=mydata,AVERAGE';
         $this->parseAndRender($def);
     }
 
-    public function testDataCalculationDefinitionCanBeParsedAndRendered()
+    public function testDataCalculationDefinitionCanBeParsedAndRendered(): void
     {
         $def = 'CDEF:mydatabits=mydata,8,*';
         $this->parseAndRender($def);
     }
 
-    public function testDataDefinitionCanBeParsedAndRendered()
+    public function testDataDefinitionCanBeParsedAndRendered(): void
     {
         $def = 'DEF:ds0=router.rrd:ds0:AVERAGE';
         $this->parseAndRender($def);
     }
 
-    public function testComplexDataDefinitionCanBeParsedAndRendered()
+    public function testComplexDataDefinitionCanBeParsedAndRendered(): void
     {
         $def = 'DEF:ds0weekly=router.rrd:ds0:AVERAGE:step=7200:start=11\:00:end=start+1h:daemon=collect1.example.com';
         $this->parseAndRender($def);

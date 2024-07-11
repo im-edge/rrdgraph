@@ -13,47 +13,47 @@ class AreaTest extends TestCase
 {
     use TestHelpers;
 
-    public function testSimpleAreaRendersCorrectly()
+    public function testSimpleAreaRendersCorrectly(): void
     {
         $area = new Area(new VariableName('def1'));
         $this->assertEquals('AREA:def1', $area->__toString());
     }
 
-    public function testStackCanBeConfigured()
+    public function testStackCanBeConfigured(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setStack();
         $this->assertTrue($area->isStack());
     }
 
-    public function testStackRendersCorrectly()
+    public function testStackRendersCorrectly(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setStack();
         $this->assertEquals('AREA:def1::STACK', $area->__toString());
     }
 
-    public function testLegendRendersCorrectly()
+    public function testLegendRendersCorrectly(): void
     {
         $area = new Area(new VariableName('def1'), null, new StringType('This is a legend'));
         $this->assertEquals("AREA:def1:'This is a legend'", $area->__toString());
     }
 
-    public function testSkipScaleCanBeConfigured()
+    public function testSkipScaleCanBeConfigured(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
         $this->assertTrue($area->isSkipScale());
     }
 
-    public function testSkipScaleRendersCorrectly()
+    public function testSkipScaleRendersCorrectly(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
         $this->assertEquals('AREA:def1::skipscale', $area->__toString());
     }
 
-    public function testSkipScaleAndStackCanBeConfiguredTogether()
+    public function testSkipScaleAndStackCanBeConfiguredTogether(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
@@ -62,7 +62,7 @@ class AreaTest extends TestCase
         $this->assertTrue($area->isStack());
     }
 
-    public function testSkipScaleAndStackRenderTogether()
+    public function testSkipScaleAndStackRenderTogether(): void
     {
         $area = new Area(new VariableName('def1'));
         $area->setSkipScale();
@@ -70,7 +70,7 @@ class AreaTest extends TestCase
         $this->assertEquals('AREA:def1::STACK:skipscale', $area->__toString());
     }
 
-    public function testRendersGivenText()
+    public function testRendersGivenText(): void
     {
         $area = new Area(new VariableName('cdef'), new Color('0095BF32'));
         $area->setStack();
@@ -81,13 +81,13 @@ class AreaTest extends TestCase
         );
     }
 
-    public function testCanBeParsedAndRendered()
+    public function testCanBeParsedAndRendered(): void
     {
         $def = 'AREA:cdef#0095BF32::STACK:skipscale';
         $this->parseAndRender($def);
     }
 
-    public function testSupportsSecondColor()
+    public function testSupportsSecondColor(): void
     {
         $def = 'AREA:cdef#0095BF32#ff95BF32::STACK:skipscale';
         $this->parseAndRender($def);
