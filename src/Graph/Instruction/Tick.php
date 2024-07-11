@@ -28,7 +28,6 @@ class Tick extends DefinitionBasedGraphInstruction
     const TAG = 'TICK';
 
     protected ?FloatType $fraction = null;
-    protected bool $skipScale = false;
 
     public function getFraction(): FloatType
     {
