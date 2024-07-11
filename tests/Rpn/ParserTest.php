@@ -126,26 +126,4 @@ class ParserTest extends TestCase
             . " LINE1:mydata#FF0000:'Data with offset':STACK";
         $this->parseAndRender($defs, $expected);
     }
-
-    public function testParsesAndRendersAberrantBehaviourDetection(): void
-    {
-        $this->markTestSkipped('Still working on this');
-        $defs = 'DEF:obs=monitor.rrd:ifOutOctets:AVERAGE'
-            . ' DEF:pred=monitor.rrd:ifOutOctets:HWPREDICT'
-            . ' DEF:dev=monitor.rrd:ifOutOctets:DEVPREDICT'
-            . ' DEF:fail=monitor.rrd:ifOutOctets:FAILURES'
-            . " TICK:fail#ffffa0:1.0:'Failures\: Average bits out'"
-            . ' CDEF:scaledobs=obs,8,*'
-            . ' CDEF:upper=pred,dev,2,*,+'
-            . ' CDEF:lower=pred,dev,2,*,-'
-            . ' CDEF:scaledupper=upper,8,*'
-            . ' CDEF:scaledlower=lower,8,*'
-            . " LINE2:scaledobs#0000ff:'Average bits out'"
-            . " LINE1:scaledupper#ff0000:'Upper Confidence Bound: Average bits out'"
-            . " LINE1:scaledupper#ff0000:'Upper Confidence Bound: Average bits out'"
-            . " LINE1:scaledlower#ff0000:'Lower Confidence Bound: Average bits out'"
-            ;
-
-        $this->parseAndRender($defs);
-    }
 }
