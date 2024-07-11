@@ -29,7 +29,7 @@ use gipfl\RrdGraph\DataType\StringType;
  * --------
  * PRINT:vname:format[:strftime|:valstrftime|:valstrfduration]
  */
-class PrintGraphInstruction implements GraphInstructionInterface
+class PrintGraphInstruction implements GraphInstructionInterface, InstructionWithVariableInterface
 {
     const TAG = 'PRINT';
 
@@ -49,6 +49,13 @@ class PrintGraphInstruction implements GraphInstructionInterface
     public function getVariableName(): VariableName
     {
         return $this->variableName;
+    }
+
+    public function renameVariable(string $oldName, string $newName)
+    {
+        if ($this->variableName->getName() === $oldName) {
+            $this->variableName->setName($newName);
+        }
     }
 
     public function getFormat(): StringType

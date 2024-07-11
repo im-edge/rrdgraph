@@ -22,7 +22,7 @@ use gipfl\RrdGraph\DataType\IntegerType;
  * --------
  * SHIFT:vname:offset
  */
-class Shift implements GraphInstructionInterface
+class Shift implements GraphInstructionInterface, InstructionWithVariableInterface
 {
     const TAG = 'SHIFT';
 
@@ -40,6 +40,13 @@ class Shift implements GraphInstructionInterface
         return $this->variableName;
     }
 
+    public function renameVariable(string $oldName, string $newName)
+    {
+        if ($this->variableName->getName() === $oldName) {
+            $this->variableName->setName($newName);
+        }
+    }
+
     public function getOffset(): IntegerType
     {
         return $this->offset;
@@ -52,6 +59,8 @@ class Shift implements GraphInstructionInterface
 
     public static function fromParameters(array $parameters): Shift
     {
+        $parameters[0] = new VariableName($parameters[0]);
+        $parameters[1] = new IntegerType((int) $parameters[1]);
         return new Shift(...$parameters);
     }
 }

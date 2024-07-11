@@ -4,6 +4,8 @@ namespace gipfl\RrdGraph;
 
 use gipfl\RrdGraph\Data\Assignment;
 use gipfl\RrdGraph\Graph\Instruction\GraphInstructionInterface;
+use gipfl\RrdGraph\Graph\Instruction\InstructionWithVariableInterface;
+use gipfl\RrdGraph\Rpn\RpnExpression;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -69,6 +71,74 @@ class GraphDefinition
         );
     }
 
+    public function getDefinitions(): array
+    {
+        return $this->defs[Assignment::TAG_DATA_DEFINITION]
+            + $this->defs[Assignment::TAG_DATA_CALCULATION]
+            + $this->defs[Assignment::TAG_VARIABLE_DEFINITION];
+    }
+
+    /**
+     * @return Assignment[]
+     */
+    public function getDataDefinitions(): array
+    {
+        return $this->defs[Assignment::TAG_DATA_DEFINITION];
+    }
+
+    public function hasDataDefinitions(): bool
+    {
+        return !empty($this->defs[Assignment::TAG_DATA_DEFINITION]);
+    }
+
+    /**
+     * @return Assignment[]
+     */
+    public function getDataCalculations(): array
+    {
+        return $this->defs[Assignment::TAG_DATA_CALCULATION];
+    }
+
+    public function hasDataCalculations(): bool
+    {
+        return !empty($this->defs[Assignment::TAG_DATA_CALCULATION]);
+    }
+
+    /**
+     * @return Assignment[]
+     */
+    public function getVariableDefinitions(): array
+    {
+        return $this->defs[Assignment::TAG_VARIABLE_DEFINITION];
+    }
+
+    public function hasVariableDefinitions(): bool
+    {
+        return !empty($this->defs[Assignment::TAG_VARIABLE_DEFINITION]);
+    }
+
+    public function hasInstructions(): bool
+    {
+        return !empty($this->instructions);
+    }
+
+    /**
+     * @return GraphInstructionInterface[]
+     */
+    public function getInstructions(): array
+    {
+        return $this->instructions;
+    }
+
+    /**
+     * @param GraphInstructionInterface[] $instructions
+     */
+    public function setInstructions(array $instructions): void
+    {
+        $this->instructions = $instructions;
+    }
+
+
     protected function getAllAssignments(): array
     {
         return array_merge(
@@ -81,6 +151,41 @@ class GraphDefinition
     public function listMissingDefinitionNames(): array
     {
         return [];
+    }
+
+    public function listUsedVariableNames(): array
+    {
+        return array_keys($this->variableNames);
+    }
+
+    public function renameVariable(string $oldName, string $newName)
+    {
+        $assignment = $this->getAssignment($oldName);
+        // Fix def name
+        $assignment->getVariableName()->setName($newName);
+        $tag = $assignment->getTag();
+        $newDefs = [];
+        // Reindex defs, respect former order
+        foreach ($this->defs[$tag] as $key => $def) {
+            if ($key === $oldName) {
+                $newDefs[$newName] = $def;
+            } else {
+                $newDefs[$key] = $def;
+            }
+        }
+        $this->defs[$tag] = $newDefs;
+        unset($newDefs);
+
+        foreach ($this->getDataCalculations() + $this->getVariableDefinitions() as $assignment) {
+            $expression = $assignment->getExpression();
+            assert($expression instanceof RpnExpression);
+            $expression->renameVariable($oldName, $newName);
+        }
+        foreach ($this->instructions as $instruction) {
+            if ($instruction instanceof InstructionWithVariableInterface) {
+                $instruction->renameVariable($oldName, $newName);
+            }
+        }
     }
 
     public function __toString(): string
