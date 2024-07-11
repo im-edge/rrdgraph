@@ -6,7 +6,6 @@ use gipfl\RrdGraph\Color;
 use gipfl\RrdGraph\DataType\BooleanType;
 use gipfl\RrdGraph\DataType\FloatType;
 use gipfl\RrdGraph\DataType\IntegerType;
-use gipfl\RrdGraph\OptionalParameters;
 use gipfl\RrdGraph\Render;
 
 /**
@@ -57,5 +56,25 @@ class Area extends DefinitionBasedGraphInstruction
             . Render::optionalParameter($this->skipscale)
             . Render::optionalNamedParameter('gradheight', $this->gradheight)
         ;
+    }
+
+    public function getColor2(): ?Color
+    {
+        return $this->color2;
+    }
+
+    public function setColor2(?Color $color2): void
+    {
+        $this->color2 = $color2;
+    }
+
+    public function getGradheight(): ?FloatType
+    {
+        return $this->gradheight;
+    }
+
+    public function setGradheight(?FloatType $gradheight): void
+    {
+        $this->gradheight = $gradheight;
     }
 }
