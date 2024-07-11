@@ -28,8 +28,8 @@ class Line extends DefinitionBasedGraphInstruction
     use SkipScale;
     use Stack;
 
-    const TAG = 'LINE';
-    const OPTIONAL_PARAMETERS = [
+    public const TAG = 'LINE';
+    public const OPTIONAL_PARAMETERS = [
         'STACK'      => BooleanType::class,
         'skipscale'  => BooleanType::class,
         'gradheight' => IntegerType::class, // TODO: Float?

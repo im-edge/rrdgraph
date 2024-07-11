@@ -16,7 +16,7 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
     protected ?Color $color = null;
     protected ?StringType $legend = null;
 
-    const OPTIONAL_PARAMETERS = [];
+    public const OPTIONAL_PARAMETERS = [];
 
     final public function __construct(VariableName $definition, ?Color $color = null, ?StringType $legend = null)
     {

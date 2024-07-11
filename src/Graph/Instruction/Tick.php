@@ -3,6 +3,7 @@
 namespace gipfl\RrdGraph\Graph\Instruction;
 
 use gipfl\RrdGraph\DataType\FloatType;
+use gipfl\RrdGraph\DataType\StringType;
 use gipfl\RrdGraph\Render;
 
 /**
@@ -25,7 +26,11 @@ class Tick extends DefinitionBasedGraphInstruction
 {
     use Dashes;
 
-    const TAG = 'TICK';
+    public const TAG = 'TICK';
+    public const OPTIONAL_PARAMETERS = [ // Hint: fraction still does not work, legend should not be required
+        'fraction' => FloatType::class,
+        'legend'   => StringType::class,
+    ];
 
     protected ?FloatType $fraction = null;
 

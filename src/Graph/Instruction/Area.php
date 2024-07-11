@@ -27,12 +27,13 @@ class Area extends DefinitionBasedGraphInstruction
     use SkipScale;
     use Stack;
 
-    const TAG = 'AREA';
-    const OPTIONAL_PARAMETERS = [
+    public const TAG = 'AREA';
+    public const OPTIONAL_PARAMETERS = [
         'STACK'      => BooleanType::class,
         'skipscale'  => BooleanType::class,
         'gradheight' => IntegerType::class, // TODO: Float?
     ];
+
     protected ?Color $color2 = null;
     /**
      * The gradheight parameter can create three different behaviors. If
