@@ -106,4 +106,24 @@ class ParserTest extends TestCase
 
         $this->parseAndRender($defs);
     }
+
+    protected function testParsesAndRendersOffsettingALineOnTheYAxis()
+    {
+        // Depending on your needs you can do this in two ways:
+        $defs = 'DEF:mydata=my.rrd:ds:AVERAGE'
+            // this will also influence any other command that uses "data"
+            . ' CDEF:data=mydata,100,+'
+            . ' LINE1:data#FF0000:"Data with offset"'
+            // Graph the original data, with an offset
+            // no color in the first line, so it is not visible
+            . ' LINE1:100'
+            // the second line gets stacked on top of the first one
+            . ' LINE1:mydata#FF0000:"Data with offset":STACK';
+        $expected =  'DEF:mydata=my.rrd:ds:AVERAGE'
+            . ' CDEF:data=mydata,100,+'
+            . " LINE1:data#FF0000:'Data with offset'"
+            . ' LINE1:100'
+            . " LINE1:mydata#FF0000:'Data with offset':STACK";
+        $this->parseAndRender($defs, $expected);
+    }
 }
