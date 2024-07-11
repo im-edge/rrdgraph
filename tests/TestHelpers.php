@@ -6,9 +6,9 @@ use gipfl\RrdGraph\GraphDefinitionParser;
 
 trait TestHelpers
 {
-    protected function parseAndRender($defs)
+    protected function parseAndRender(string $defs, ?string $expectedString = null)
     {
         $parser = new GraphDefinitionParser($defs);
-        $this->assertEquals($defs, (string) $parser->parse());
+        $this->assertEquals($expectedString ?: $defs, (string) $parser->parse());
     }
 }
