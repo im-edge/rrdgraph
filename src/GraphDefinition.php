@@ -20,6 +20,8 @@ class GraphDefinition
         // Assignments with VariableDefinition
         Assignment::TAG_VARIABLE_DEFINITION => [],
     ];
+    /** @var array<int, Assignment> */
+    protected array $sortedDefs = [];
 
     /** @var array<string, string> $variableNames = $variableName => $tag */
     protected array $variableNames = [];
@@ -44,6 +46,7 @@ class GraphDefinition
         }
         $this->variableNames[$name] = $tag;
         $this->defs[$tag][$name] = $assignment;
+        $this->sortedDefs[] = $assignment;
     }
 
     public function getAssignment($variableName): Assignment
@@ -190,6 +193,6 @@ class GraphDefinition
 
     public function __toString(): string
     {
-        return implode(' ', array_merge($this->getAllAssignments(), $this->instructions));
+        return implode(' ', array_merge($this->sortedDefs, $this->instructions));
     }
 }
