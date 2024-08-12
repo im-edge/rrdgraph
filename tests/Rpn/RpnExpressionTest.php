@@ -16,6 +16,14 @@ class RpnExpressionTest extends TestCase
         $this->assertEquals($def, (string) $expression);
     }
 
+    public function testSupportsPoppingFromStack(): void
+    {
+        $def = 'some_def,POP,2,1,+';
+        $expression = RpnExpression::parse($def);
+        // Hint: currently we cannot "render" POP
+        $this->assertEquals($def, (string) $expression);
+    }
+
     public function testExpressionVariableCanBeRenamed(): void
     {
         $def = 'def_average_iowait,def_average_softirq,def_average_irq,def_average_nice,def_average_steal,'

@@ -81,6 +81,15 @@ class RpnExpression implements ExpressionInterface
         }
 
         $expression = static::consumeStackOperator($operatorName, $stack);
+
+        // TODO: better common logic / interface for stack-manipulating operators?
+        while (end($stack) === 'POP') {
+            $pop = static::consumeStackOperator(array_pop($stack), $stack);
+            $operator = $pop->operator;
+            assert($operator instanceof RemoveTopStackElement);
+            $operator->setFollowupExpression($expression);
+            $expression = $pop;
+        }
         if (! empty($stack)) {
             throw new RuntimeException(sprintf(
                 "Stack not empty, still contains: '%s'",
@@ -159,9 +168,22 @@ class RpnExpression implements ExpressionInterface
         return $string;
     }
 
+    protected function renderFollowUp(): string
+    {
+        $followUp = '';
+        $operator = $this->operator;
+        if ($operator instanceof RemoveTopStackElement) {
+            if ($expression = $operator->getFollowUpExpression()) {
+                $followUp .= ',' . $expression;
+            }
+        }
+
+        return $followUp;
+    }
+
     public function __toString(): string
     {
-        return $this->renderParams() . $this->operator::NAME;
+        return $this->renderParams() . $this->operator::NAME . $this->renderFollowUp();
     }
 
     protected static function requireStackValue(&$stack, string $operatorName)

@@ -8,4 +8,17 @@ namespace IMEdge\RrdGraph\Rpn;
 class RemoveTopStackElement extends StackOperator
 {
     const NAME = 'POP';
+    protected ?int $parameterCount = 1;
+    protected bool $isVariadic = false;
+    protected ?RpnExpression $followUp = null;
+
+    public function setFollowupExpression(RpnExpression $followUp): void
+    {
+        $this->followUp = $followUp;
+    }
+
+    public function getFollowUpExpression(): ?RpnExpression
+    {
+        return $this->followUp;
+    }
 }

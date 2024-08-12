@@ -188,7 +188,7 @@ class RrdGraphRpnDocumentationExamplesTest extends TestCase
             'idat1,UN,0,idat1,IF,idat2,UN,0,idat2,IF,+,8,*',
             'odat1,UN,0,odat1,IF,odat2,UN,0,odat2,IF,+,8,*',
             // TODO -> POP
-            // 'val4,POP,TIME,7200,%,3600,LE,INF,UNKN,IF',
+            'val4,POP,TIME,7200,%,3600,LE,INF,UNKN,IF',
             'val1,val2,val3,val4,+,+,+,UN,INF,UNKN,IF',
         ]);
     }
