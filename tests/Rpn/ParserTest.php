@@ -2,7 +2,6 @@
 
 namespace IMEdge\Tests\RrdGraph\Rpn;
 
-use IMEdge\RrdGraph\GraphDefinitionParser;
 use IMEdge\Tests\RrdGraph\TestHelpers;
 use PHPUnit\Framework\TestCase;
 
