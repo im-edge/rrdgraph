@@ -53,6 +53,11 @@ class RpnExpression implements ExpressionInterface
 
     public function renameVariable($oldName, $newName): self
     {
+        if ($this->operator instanceof RemoveTopStackElement) { // TODO: generic interface?
+            if ($folluwUp = $this->operator->getFollowUpExpression()) {
+                $folluwUp->renameVariable($oldName, $newName);
+            }
+        }
         foreach ($this->parameters as $parameter) {
             if ($parameter instanceof VariableName && $parameter->getName() === $oldName) {
                 $parameter->setName($newName);
