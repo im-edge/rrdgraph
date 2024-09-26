@@ -5,6 +5,7 @@ namespace IMEdge\RrdGraph\Graph\Instruction;
 use IMEdge\RrdGraph\Color;
 use IMEdge\RrdGraph\Data\VariableName;
 use IMEdge\RrdGraph\DataType\BooleanType;
+use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use IMEdge\RrdGraph\DataType\StringType;
 use InvalidArgumentException;
 use RuntimeException;
@@ -75,19 +76,26 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
         } else {
             $color2 = null;
         }
-        foreach ($parameters as $key => $parameter) {
-            if (preg_match('/^([^\'][a-zA-Z+])=(.+)$/', $parameter, $match)) {
+        $unset = [];
+        foreach ($parameters as $numericKey => $parameter) {
+            if (preg_match('/^([^\'][a-zA-Z]+(?:[a-zA-Z-][a-zA-Z])*)=(.+)$/', $parameter, $match)) {
                 $key = $match[1];
                 $parameter = $match[2];
-            }
-            if (isset(static::OPTIONAL_PARAMETERS[$parameter])) {
-                $class = static::OPTIONAL_PARAMETERS[$parameter];
-                $parameters[$key] = $class::parse($parameter);
             } else {
-                $parameters[$key] = StringType::parse($parameter);
+                $key = $parameter;
+            }
+            if (isset(static::OPTIONAL_PARAMETERS[$key])) {
+                $class = static::OPTIONAL_PARAMETERS[$key];
+                $parameters[$key] = $class::parse($parameter);
+                $unset[] = $numericKey;
+            } else {
+                $parameters[$numericKey] = StringType::parse($parameter);
             }
         }
-        if (! empty($parameters) && $parameters[0] instanceof StringType) {
+        foreach ($unset as $key) {
+            unset($parameters[$key]);
+        }
+        if (isset($parameters[0]) && $parameters[0] instanceof StringType) {
             $legend = array_shift($parameters);
         } else {
             $legend = null;
@@ -104,11 +112,13 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
                 ));
             }
         }
-        foreach ($parameters as $boolean) {
-            if ($boolean instanceof BooleanType) {
-                $self->{$boolean->getLabel()} = $boolean;
+        foreach ($parameters as $key => $value) {
+            if ($value instanceof BooleanType) {
+                $self->{$value->getLabel()} = $value;
+            } elseif (is_string($key)) {
+                $self->$key = $value->getRawString();
             } else {
-                throw new InvalidArgumentException("Got unknown optional parameter: $boolean");
+                throw new InvalidArgumentException("Got unknown optional parameter: $value" . var_export($key, true));
             }
         }
 
