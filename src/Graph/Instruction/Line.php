@@ -4,6 +4,7 @@ namespace IMEdge\RrdGraph\Graph\Instruction;
 
 use IMEdge\RrdGraph\DataType\BooleanType;
 use IMEdge\RrdGraph\DataType\IntegerType;
+use IMEdge\RrdGraph\DataType\StringType;
 use IMEdge\RrdGraph\Render;
 
 /**
@@ -30,9 +31,11 @@ class Line extends DefinitionBasedGraphInstruction
 
     public const TAG = 'LINE';
     public const OPTIONAL_PARAMETERS = [
-        'STACK'      => BooleanType::class,
-        'skipscale'  => BooleanType::class,
-        'gradheight' => IntegerType::class, // TODO: Float?
+        'STACK'       => BooleanType::class,
+        'skipscale'   => BooleanType::class,
+        'gradheight'  => IntegerType::class, // TODO: Float?
+        'dashes'      => StringType::class,
+        'dash-offset' => StringType::class,
     ];
 
     protected float $width = 1;
