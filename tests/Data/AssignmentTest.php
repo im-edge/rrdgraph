@@ -17,7 +17,10 @@ class AssignmentTest extends TestCase
 
     public function testDefineAndRenderMultiplication(): void
     {
-        $def = new Assignment('DEF', new VariableName('result'), new RpnExpression(new Multiply(), [5, 6]));
+        $def = new Assignment('DEF', new VariableName('result'), new RpnExpression(new Multiply(), [
+            new IntegerType(5),
+            new IntegerType(6)
+        ]));
         $this->assertEquals('DEF:result=6,5,*', (string) $def);
     }
 

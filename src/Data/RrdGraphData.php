@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -39,7 +41,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function addDataCalculation($expression, $preferredAlias = null): string
+    public function addDataCalculation(string $expression, ?string $preferredAlias = null): string
     {
         if (isset($this->dataCalculations[$expression])) {
             return $this->dataCalculations[$expression];
@@ -53,7 +55,7 @@ class RrdGraphData
         return $alias;
     }
 
-    public function addVariableDefinition($expression, $preferredAlias = null): string
+    public function addVariableDefinition(string $expression, ?string $preferredAlias = null): string
     {
         if (isset($this->variableDefinitions[$expression])) {
             return $this->variableDefinitions[$expression];
@@ -88,7 +90,7 @@ class RrdGraphData
         */
     }
 
-    protected function getUniqueAlias($name): string
+    protected function getUniqueAlias(string $name): string
     {
         while (isset($this->data[$name])) {
             $name = $this->makeNextName($name);
@@ -97,7 +99,7 @@ class RrdGraphData
         return $name;
     }
 
-    protected function makeNextName($name): string
+    protected function makeNextName(string $name): string
     {
         if (preg_match('/^(.+__)(\d+)$/', $name, $match)) {
             return $match[1] . ((int) $match[2] + 1);
@@ -106,6 +108,9 @@ class RrdGraphData
         }
     }
 
+    /**
+     * @return string[]
+     */
     public function getInstructions(): array
     {
         $instructions = [];

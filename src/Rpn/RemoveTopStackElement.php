@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,7 +9,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class RemoveTopStackElement extends StackOperator
 {
-    const NAME = 'POP';
+    public const NAME = 'POP';
     protected ?int $parameterCount = 1;
     protected bool $isVariadic = false;
     protected ?RpnExpression $followUp = null;

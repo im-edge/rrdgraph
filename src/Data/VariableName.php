@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -26,7 +28,7 @@ class VariableName
         return $this->name;
     }
 
-    public function setName($name): self
+    public function setName(string $name): self
     {
         if (! static::isValid($name)) {
             throw new InvalidArgumentException("'$name' is not a valid Variable Name (vname)");

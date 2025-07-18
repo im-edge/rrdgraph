@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -8,5 +10,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class AddNan extends ArithmeticOperator
 {
-    const NAME = 'ADDNAN';
+    public const NAME = 'ADDNAN';
 }

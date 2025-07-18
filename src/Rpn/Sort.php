@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -11,5 +13,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Sort extends SetOperator
 {
-    const NAME = 'SORT';
+    public const NAME = 'SORT';
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -25,7 +27,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Trend extends SetOperator
 {
-    const NAME = 'TREND';
+    public const NAME = 'TREND';
     protected bool $isVariadic = false;
     protected ?int $parameterCount = 2;
 }

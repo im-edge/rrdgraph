@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
@@ -9,16 +11,18 @@ use IMEdge\RrdGraph\Graph\Instruction\InstructionRegistry;
 use IMEdge\RrdGraph\Graph\Instruction\Line;
 use OutOfBoundsException;
 use RuntimeException;
+
 use function preg_match;
 use function strlen;
 use function substr;
 
 class GraphDefinitionParser
 {
-    const FIELD_SEPARATOR = ':';
-    const STRING_SINGLE_QUOTE = "'";
-    const STRING_DOUBLE_QUOTE = '"';
-    const ESCAPE = '\\';
+    protected const FIELD_SEPARATOR = ':';
+    protected const STRING_SINGLE_QUOTE = "'";
+    protected const STRING_DOUBLE_QUOTE = '"';
+    protected const ESCAPE = '\\';
+
     protected string $string;
     protected int $position;
     protected int $length;
@@ -38,8 +42,10 @@ class GraphDefinitionParser
             foreach ($this->parseDefinitions() as $res) {
                 if ($res instanceof GraphInstructionInterface) {
                     $definition->addGraphInstruction($res);
-                } else {
+                } elseif ($res instanceof Assignment) {
                     $definition->addAssignment($res);
+                } else {
+                    throw new RuntimeException('Got neither Instruction nor Assignment');
                 }
             }
         }
@@ -93,6 +99,9 @@ class GraphDefinitionParser
         return substr($this->string, $start, $length);
     }
 
+    /**
+     * @return Generator<string>
+     */
     public function parseParameters(): Generator
     {
         $start = $this->position + 1;
@@ -176,9 +185,10 @@ class GraphDefinitionParser
         return null;
     }
 
-    protected function skipWhitespace()
+    protected function skipWhitespace(): void
     {
-        while ($this->position < $this->length
+        while (
+            $this->position < $this->length
             && preg_match('/[\r\n\s\t]/', $this->string[$this->position])
         ) {
             $this->position++;

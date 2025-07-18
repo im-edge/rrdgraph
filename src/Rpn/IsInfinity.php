@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -10,7 +12,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class IsInfinity extends BooleanOperator
 {
-    const NAME = 'ISINF';
+    public const NAME = 'ISINF';
 
     protected ?int $parameterCount = 1;
 }

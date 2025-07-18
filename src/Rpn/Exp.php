@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,7 +9,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Exp extends ArithmeticOperator
 {
-    const NAME = 'EXP';
+    public const NAME = 'EXP';
 
     protected ?int $parameterCount = 1;
 }

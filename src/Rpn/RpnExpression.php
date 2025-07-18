@@ -1,23 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
 use IMEdge\RrdGraph\Data\ExpressionInterface;
 use IMEdge\RrdGraph\Data\VariableName;
+use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use InvalidArgumentException;
 use RuntimeException;
 
 class RpnExpression implements ExpressionInterface
 {
     protected Operator $operator;
+    /** @var array<int, ExpressionInterface|DataTypeInterface|VariableName|string> -> not sure */
     protected array $parameters;
+    /** @var array<int, ExpressionInterface|DataTypeInterface|VariableName|string> */
     protected array $variadicParameters;
 
     /**
      * Expression constructor.
      * @param Operator $operator
-     * @param array $parameters
-     * @param array $variadicParameters
+     * @param array<int, ExpressionInterface|DataTypeInterface|VariableName|string> $parameters
+     * @param array<int, ExpressionInterface|DataTypeInterface|VariableName|string> $variadicParameters
      */
     public function __construct(Operator $operator, array $parameters = [], array $variadicParameters = [])
     {
@@ -35,6 +40,9 @@ class RpnExpression implements ExpressionInterface
         $this->variadicParameters = $variadicParameters;
     }
 
+    /**
+     * @return string[]
+     */
     public function listUsedVariableNames(): array
     {
         $names = [];
@@ -51,11 +59,11 @@ class RpnExpression implements ExpressionInterface
         return $names;
     }
 
-    public function renameVariable($oldName, $newName): self
+    public function renameVariable(string $oldName, string $newName): self
     {
         if ($this->operator instanceof RemoveTopStackElement) { // TODO: generic interface?
-            if ($folluwUp = $this->operator->getFollowUpExpression()) {
-                $folluwUp->renameVariable($oldName, $newName);
+            if ($followUp = $this->operator->getFollowUpExpression()) {
+                $followUp->renameVariable($oldName, $newName);
             }
         }
         foreach ($this->parameters as $parameter) {
@@ -78,7 +86,7 @@ class RpnExpression implements ExpressionInterface
     {
         $stack = $parameters;
         $operatorName = array_pop($stack);
-        if (strlen($operatorName) === 0) {
+        if (! is_string($operatorName) || strlen($operatorName) === 0) {
             throw new InvalidArgumentException(sprintf(
                 "'%s' is not a valid RPN expression",
                 implode(',', $stack)
@@ -105,11 +113,14 @@ class RpnExpression implements ExpressionInterface
         return $expression;
     }
 
-    protected static function consumeStackOperator($operatorName, array &$stack): RpnExpression
+    /**
+     * @param string[] $stack
+     */
+    protected static function consumeStackOperator(string $operatorName, array &$stack): RpnExpression
     {
         $class = OperatorRegistry::getClass($operatorName);
         /** @var Operator $operator */
-        $operator = new $class;
+        $operator = new $class();
         if ($operator->isVariadic() && $operator->variadicCountIsFirst()) {
             $variadicCount = self::requireVariadicCount($stack, $operatorName);
         } else {
@@ -128,6 +139,9 @@ class RpnExpression implements ExpressionInterface
         return new RpnExpression($operator, $params, $variadic);
     }
 
+    /**
+     * @param string[] $stack
+     */
     protected static function requireVariadicCount(array &$stack, string $operatorName): int
     {
         $count = self::requireStackValue($stack, $operatorName);
@@ -138,6 +152,10 @@ class RpnExpression implements ExpressionInterface
         return (int) $count;
     }
 
+    /**
+     * @param string[] $stack
+     * @return array<int, VariableName|RpnExpression|string>
+     */
     protected static function requireStackParams(array &$stack, int $count, string $operatorName): array
     {
         $params = [];
@@ -191,6 +209,10 @@ class RpnExpression implements ExpressionInterface
         return $this->renderParams() . $this->operator::NAME . $this->renderFollowUp();
     }
 
+    /**
+     * @param string[] $stack
+     * @return VariableName|RpnExpression|string
+     */
     protected static function requireStackValue(&$stack, string $operatorName)
     {
         if (null === ($value = array_pop($stack))) {

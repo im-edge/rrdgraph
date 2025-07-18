@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -24,7 +26,7 @@ use IMEdge\RrdGraph\DataType\IntegerType;
  */
 class Shift implements GraphInstructionInterface, InstructionWithVariableInterface
 {
-    const TAG = 'SHIFT';
+    public const TAG = 'SHIFT';
 
     protected VariableName $variableName;
     protected IntegerType $offset;
@@ -40,7 +42,7 @@ class Shift implements GraphInstructionInterface, InstructionWithVariableInterfa
         return $this->variableName;
     }
 
-    public function renameVariable(string $oldName, string $newName)
+    public function renameVariable(string $oldName, string $newName): void
     {
         if ($this->variableName->getName() === $oldName) {
             $this->variableName->setName($newName);
@@ -59,8 +61,12 @@ class Shift implements GraphInstructionInterface, InstructionWithVariableInterfa
 
     public static function fromParameters(array $parameters): Shift
     {
-        $parameters[0] = new VariableName($parameters[0]);
-        $parameters[1] = new IntegerType((int) $parameters[1]);
-        return new Shift(...$parameters);
+        if (! is_string($parameters[1])) {
+            throw new \RuntimeException('SHIFT requires a numeric string as second parameter');
+        }
+        return new Shift(
+            new VariableName($parameters[0]),
+            new IntegerType((int) $parameters[1])
+        );
     }
 }

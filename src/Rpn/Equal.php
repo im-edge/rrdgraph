@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
 class Equal extends BooleanOperator
 {
-    const NAME = 'EQ';
+    public const NAME = 'EQ';
 }

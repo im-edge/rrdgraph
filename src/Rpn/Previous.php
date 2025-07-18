@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -10,5 +12,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Previous extends SpecialValue
 {
-    const NAME = 'PREV';
+    public const NAME = 'PREV';
 }

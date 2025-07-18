@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
 class Divide extends ArithmeticOperator
 {
-    const NAME = '/';
+    public const NAME = '/';
 }

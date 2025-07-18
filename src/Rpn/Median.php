@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -12,5 +14,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Median extends SetOperator
 {
-    const NAME = 'MEDIAN';
+    public const NAME = 'MEDIAN';
 }

@@ -1,10 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
 use IMEdge\RrdGraph\DataType\BooleanType;
 use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use InvalidArgumentException;
+
 use function addcslashes;
 use function ctype_digit;
 use function is_int;
@@ -26,7 +29,11 @@ final class Render
         return "'" . addcslashes($string, "':") . "'";
     }
 
-    public static function optionalParameter(?DataTypeInterface $parameter, $followingFlags = []): string
+    /**
+     * @param ?DataTypeInterface $parameter
+     * @param array<?BooleanType> $followingFlags
+     */
+    public static function optionalParameter(?DataTypeInterface $parameter, array $followingFlags = []): string
     {
         if ($parameter === null) {
             return self::emptyDependingOnFollowingFlags($followingFlags);
@@ -36,10 +43,14 @@ final class Render
             return ":$parameter";
         }
 
-
         return self::emptyDependingOnFollowingFlags($followingFlags);
     }
 
+    /**
+     * @param string $parameter
+     * @param \Stringable|string|null $value
+     * @return string
+     */
     public static function optionalNamedParameter(string $parameter, $value): string
     {
         if ($value !== null && strlen((string) $value)) {
@@ -63,10 +74,21 @@ final class Render
         }
     }
 
+    /**
+     * @param float|int|string $number
+     */
     public static function float($number): string
     {
         if (is_float($number)) {
-            return preg_replace('/\.0+$/', '', preg_replace('/(\..+?)0+$/', '\1', sprintf('%.6F', $number)));
+            return preg_replace(
+                '/\.0+$/',
+                '',
+                preg_replace(
+                    '/(\..+?)0+$/',
+                    '\1',
+                    sprintf('%.6F', $number)
+                ) ?? ''
+            ) ?? '';
         } elseif (is_int($number)) {
             return (string) $number;
         } elseif (ctype_digit($number)) {
@@ -76,9 +98,11 @@ final class Render
         throw new InvalidArgumentException("Number expected, got $number");
     }
 
-    protected static function emptyDependingOnFollowingFlags($followingFlags = []): string
+    /**
+     * @param array<?BooleanType> $followingFlags
+     */
+    protected static function emptyDependingOnFollowingFlags(array $followingFlags = []): string
     {
-        /** @var ?BooleanType $boolean */
         foreach ($followingFlags as $boolean) {
             if ($boolean !== null && $boolean->isTrue()) {
                 return ':';

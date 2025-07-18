@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
 class LessOrEqual extends BooleanOperator
 {
-    const NAME = 'LE';
+    public const NAME = 'LE';
 }

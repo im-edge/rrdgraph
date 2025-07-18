@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,5 +9,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Now extends TimeValue
 {
-    const NAME = 'NOW';
+    public const NAME = 'NOW';
 }

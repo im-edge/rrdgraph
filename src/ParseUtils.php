@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
 use InvalidArgumentException;
+
 use function strlen;
 use function strpos;
 use function substr;
@@ -24,6 +27,9 @@ class ParseUtils
         throw new InvalidArgumentException("'$prefix...' expected, got '$string'");
     }
 
+    /**
+     * @return array{0: string, 1: string}
+     */
     public static function splitKeyValue(string $string, string $separator): array
     {
         $pos = strpos($string, $separator);

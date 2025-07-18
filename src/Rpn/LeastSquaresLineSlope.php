@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -13,5 +15,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class LeastSquaresLineSlope extends VariablesOperator
 {
-    const NAME = 'LSLSLOPE';
+    public const NAME = 'LSLSLOPE';
 }

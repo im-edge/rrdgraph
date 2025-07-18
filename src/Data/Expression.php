@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -36,5 +38,5 @@ use IMEdge\RrdGraph\Rpn\RpnExpression;
  */
 abstract class Expression extends RpnExpression implements DataDefinitionInterface
 {
-    const TAG = 'INVALID';
+    public const TAG = 'INVALID';
 }

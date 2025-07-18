@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -10,5 +12,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class StepWidth extends TimeValue
 {
-    const NAME = 'STEPWIDTH';
+    public const NAME = 'STEPWIDTH';
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -9,7 +11,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class IsUnknown extends BooleanOperator
 {
-    const NAME = 'UN';
+    public const NAME = 'UN';
 
     protected ?int $parameterCount = 1;
 }

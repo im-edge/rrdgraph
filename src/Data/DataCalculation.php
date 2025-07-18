@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -22,5 +24,5 @@ namespace IMEdge\RrdGraph\Data;
  */
 class DataCalculation extends Expression
 {
-    const TAG = 'CDEF';
+    public const TAG = 'CDEF';
 }

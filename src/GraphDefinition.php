@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
@@ -29,7 +31,7 @@ class GraphDefinition
     /** @var GraphInstructionInterface[] */
     protected array $instructions = [];
 
-    public function addAssignment(Assignment $assignment)
+    public function addAssignment(Assignment $assignment): void
     {
         $tag = $assignment->getTag();
         $name = $assignment->getVariableName()->getName();
@@ -49,7 +51,7 @@ class GraphDefinition
         $this->sortedDefs[] = $assignment;
     }
 
-    public function getAssignment($variableName): Assignment
+    public function getAssignment(string $variableName): Assignment
     {
         if (! isset($this->variableNames[$variableName])) {
             throw new InvalidArgumentException("Got no such definition: '$variableName'");
@@ -60,11 +62,14 @@ class GraphDefinition
         return $this->defs[$tag][$variableName];
     }
 
-    public function addGraphInstruction(GraphInstructionInterface $instruction)
+    public function addGraphInstruction(GraphInstructionInterface $instruction): void
     {
         $this->instructions[] = $instruction;
     }
 
+    /**
+     * @return string[]
+     */
     public function listVariableNames(): array
     {
         return array_merge(
@@ -74,6 +79,9 @@ class GraphDefinition
         );
     }
 
+    /**
+     * @return Assignment[]
+     */
     public function getDefinitions(): array
     {
         return $this->defs[Assignment::TAG_DATA_DEFINITION]
@@ -142,6 +150,9 @@ class GraphDefinition
     }
 
 
+    /**
+     * @return array<string, Assignment>
+     */
     protected function getAllAssignments(): array
     {
         return array_merge(
@@ -151,17 +162,23 @@ class GraphDefinition
         );
     }
 
+    /**
+     * @return string[]
+     */
     public function listMissingDefinitionNames(): array
     {
         return [];
     }
 
+    /**
+     * @return string[]
+     */
     public function listUsedVariableNames(): array
     {
         return array_keys($this->variableNames);
     }
 
-    public function renameVariable(string $oldName, string $newName)
+    public function renameVariable(string $oldName, string $newName): void
     {
         $assignment = $this->getAssignment($oldName);
         // Fix def name

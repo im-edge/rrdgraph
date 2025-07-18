@@ -1,15 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
 use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use RuntimeException;
+
 use function array_keys;
 use function sprintf;
 
 trait OptionalParameters
 {
-    protected function setOptionalParameters(array $parameters)
+    /**
+     * @param string[] $parameters
+     */
+    protected function setOptionalParameters(array $parameters): void
     {
         foreach ($parameters as $parameter) {
             list($param, $value) = ParseUtils::splitKeyValue($parameter, '=');
@@ -32,7 +38,7 @@ trait OptionalParameters
         $string = '';
         foreach (array_keys(static::OPTIONAL_PARAMETERS) as $parameter) {
             if ($this->$parameter !== null) {
-                $string .= Render::namedParameter($parameter, $this->$parameter);
+                $string .= Render::namedParameter((string) $parameter, $this->$parameter);
             }
         }
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -16,5 +18,5 @@ namespace IMEdge\RrdGraph\Graph\Instruction;
  */
 class GPrint extends PrintGraphInstruction
 {
-    const TAG = 'GPRINT';
+    public const TAG = 'GPRINT';
 }

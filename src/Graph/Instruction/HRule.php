@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -23,7 +25,8 @@ class HRule implements GraphInstructionInterface
 {
     use Dashes;
 
-    const TAG = 'HRULE';
+    public const TAG = 'HRULE';
+
     protected FloatType $value;
     protected ?Color $color = null;
     protected ?StringType $legend = null;
@@ -48,7 +51,7 @@ class HRule implements GraphInstructionInterface
     public static function fromParameters(array $parameters): HRule
     {
         $first = array_shift($parameters);
-        $parts = explode('#', $first);
+        $parts = explode('#', $first ?? '');
         $value = FloatType::parse(array_shift($parts));
         if (! empty($parts)) {
             $color = new Color(array_shift($parts));
@@ -56,11 +59,7 @@ class HRule implements GraphInstructionInterface
             $color = null;
         }
         // TODO: Dashes?
-        if (! empty($parameters) && $parameters[0] instanceof StringType) {
-            $legend = array_shift($parameters);
-        } else {
-            $legend = null;
-        }
+        $legend = new StringType(array_shift($parameters) ?? '');
 
         return  new static($value, $color, $legend);
     }

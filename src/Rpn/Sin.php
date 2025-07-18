@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,7 +9,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Sin extends ArithmeticOperator
 {
-    const NAME = 'SIN';
+    public const NAME = 'SIN';
 
     protected ?int $parameterCount = 1;
 }

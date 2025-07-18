@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\DataType;
 
 use InvalidArgumentException;
+
 use function in_array;
 
 /**
@@ -10,12 +13,12 @@ use function in_array;
  */
 class AlignmentEnum implements DataTypeInterface
 {
-    const LEFT      = 'left';
-    const RIGHT     = 'right';
-    const JUSTIFIED = 'justified';
-    const CENTER    = 'center';
+    public const LEFT      = 'left';
+    public const RIGHT     = 'right';
+    public const JUSTIFIED = 'justified';
+    public const CENTER    = 'center';
 
-    const VALID_ALIGNMENTS = [
+    protected const VALID_ALIGNMENTS = [
         self::LEFT,
         self::RIGHT,
         self::JUSTIFIED,
@@ -29,7 +32,7 @@ class AlignmentEnum implements DataTypeInterface
         $this->alignment = $alignment;
     }
 
-    public static function assertValid(string $string)
+    public static function assertValid(string $string): void
     {
         if (! in_array($string, self::VALID_ALIGNMENTS)) {
             throw new InvalidArgumentException(
@@ -43,6 +46,10 @@ class AlignmentEnum implements DataTypeInterface
         return $this->alignment;
     }
 
+    /**
+     * @param string $string
+     * @return AlignmentEnum
+     */
     public static function parse(string $string): DataTypeInterface
     {
         return new AlignmentEnum($string);

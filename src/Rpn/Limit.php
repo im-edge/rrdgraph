@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -16,7 +18,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Limit extends CompareValuesOperator
 {
-    const NAME = 'LIMIT';
+    public const NAME = 'LIMIT';
 
     protected ?int $parameterCount = 3;
 }

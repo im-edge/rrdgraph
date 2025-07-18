@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -8,6 +10,7 @@ use IMEdge\RrdGraph\DataType\TimeInterface;
 use IMEdge\RrdGraph\DataType\TimeType;
 use IMEdge\RrdGraph\OptionalParameters;
 use InvalidArgumentException;
+
 use function sprintf;
 
 /**
@@ -20,9 +23,9 @@ class DataDefinition implements ExpressionInterface
 {
     use OptionalParameters;
 
-    const TAG = 'DEF';
-    const REQUIRED_PARAMETERS = 3;
-    const OPTIONAL_PARAMETERS = [
+    public const TAG = 'DEF';
+    public const REQUIRED_PARAMETERS = 3;
+    public const OPTIONAL_PARAMETERS = [
         'step'   => IntegerType::class,
         'start'  => TimeType::class,
         'end'    => TimeType::class,
@@ -53,17 +56,23 @@ class DataDefinition implements ExpressionInterface
         $this->consolidationFunction = $consolidationFunction;
     }
 
+    /**
+     * @param string[] $parameters
+     */
     protected static function fromRequiredParameters(array &$parameters): DataDefinition
     {
         static::assertRequiredParameterCount($parameters);
 
         return new DataDefinition(
-            StringType::parse(array_shift($parameters)),
-            StringType::parse(array_shift($parameters)),
-            StringType::parse(array_shift($parameters))
+            StringType::parse(array_shift($parameters) ?? ''),
+            StringType::parse(array_shift($parameters) ?? ''),
+            StringType::parse(array_shift($parameters) ?? '')
         );
     }
 
+    /**
+     * @param string[] $parameters
+     */
     protected static function assertRequiredParameterCount(array $parameters): void
     {
         if (count($parameters) < static::REQUIRED_PARAMETERS) {
@@ -76,6 +85,9 @@ class DataDefinition implements ExpressionInterface
         }
     }
 
+    /**
+     * @param string[] $parameters
+     */
     public static function fromParameters(array $parameters): DataDefinition
     {
         $self = DataDefinition::fromRequiredParameters($parameters);

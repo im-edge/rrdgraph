@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -9,7 +11,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Depth extends StackOperator
 {
-    const NAME = 'DEPTH';
+    public const NAME = 'DEPTH';
 
     protected bool $isVariadic = false;
     protected ?int $parameterCount = 0;

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -21,7 +23,7 @@ use IMEdge\RrdGraph\DataType\StringType;
  */
 class Comment implements GraphInstructionInterface
 {
-    const TAG = 'COMMENT';
+    public const TAG = 'COMMENT';
 
     public StringType $text;
 
@@ -38,6 +40,7 @@ class Comment implements GraphInstructionInterface
     public static function fromParameters(array $parameters): Comment
     {
         $parameters[0] = StringType::parse($parameters[0]);
-        return new Comment(...$parameters);
+
+        return new Comment($parameters[0]);
     }
 }

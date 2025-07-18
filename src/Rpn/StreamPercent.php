@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -20,6 +22,6 @@ namespace IMEdge\RrdGraph\Rpn;
 class StreamPercent extends VariablesOperator
 {
     // TODO: teach the parser how to distinct this from 'normal' PERCENT
-    const NAME = 'PERCENT';
+    public const NAME = 'PERCENT';
     protected ?int $parameterCount = 2;
 }

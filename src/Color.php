@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph;
 
 use InvalidArgumentException;
+
 use function ltrim;
 use function strlen;
 use function substr;

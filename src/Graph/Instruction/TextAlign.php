@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -16,7 +18,7 @@ use IMEdge\RrdGraph\DataType\AlignmentEnum;
  */
 class TextAlign implements GraphInstructionInterface
 {
-    const TAG = 'TEXTALIGN';
+    public const TAG = 'TEXTALIGN';
 
     protected AlignmentEnum $alignment;
 
@@ -32,6 +34,10 @@ class TextAlign implements GraphInstructionInterface
 
     public static function fromParameters(array $parameters): TextAlign
     {
-        return new TextAlign(...$parameters);
+        if (count($parameters) !== 1) {
+            throw new \InvalidArgumentException('TEXTALIGN expects exactly one parameter');
+        }
+
+        return new TextAlign(AlignmentEnum::parse($parameters[0]));
     }
 }

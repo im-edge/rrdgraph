@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -34,7 +36,7 @@ class Tick extends DefinitionBasedGraphInstruction
 
     protected ?FloatType $fraction = null;
 
-    public function getFraction(): FloatType
+    public function getFraction(): ?FloatType
     {
         return $this->fraction;
     }

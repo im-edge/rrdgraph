@@ -1,18 +1,20 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
 use IMEdge\RrdGraph\Color;
 use IMEdge\RrdGraph\Data\VariableName;
 use IMEdge\RrdGraph\DataType\BooleanType;
-use IMEdge\RrdGraph\DataType\DataTypeInterface;
 use IMEdge\RrdGraph\DataType\StringType;
 use InvalidArgumentException;
 use RuntimeException;
 
 abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterface, InstructionWithVariableInterface
 {
-    const TAG = 'DEFINITION_WITHOUT_TAG';
+    public const TAG = 'DEFINITION_WITHOUT_TAG';
+
     protected VariableName $definition;
     protected ?Color $color = null;
     protected ?StringType $legend = null;
@@ -51,7 +53,7 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
         $this->legend = $legend;
     }
 
-    public function renameVariable(string $oldName, string $newName)
+    public function renameVariable(string $oldName, string $newName): void
     {
         if ($this->definition->getName() === $oldName) {
             $this->definition->setName($newName);
@@ -61,7 +63,7 @@ abstract class DefinitionBasedGraphInstruction implements GraphInstructionInterf
     public static function fromParameters(array $parameters): self
     {
         $variable = array_shift($parameters);
-        $parts = explode('#', $variable);
+        $parts = explode('#', $variable ?? '');
         if ($parts[0] === '0') {
             throw new RuntimeException('$parts[0] is "0": ' . var_export($parts, true)); // TODO: when does this happen?
         }

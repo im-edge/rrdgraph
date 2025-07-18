@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -9,5 +11,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Copy extends StackOperator
 {
-    const NAME = 'COPY';
+    public const NAME = 'COPY';
 }

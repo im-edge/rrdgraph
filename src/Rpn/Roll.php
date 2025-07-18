@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -14,5 +16,5 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Roll extends StackOperator
 {
-    const NAME = 'ROLL';
+    public const NAME = 'ROLL';
 }

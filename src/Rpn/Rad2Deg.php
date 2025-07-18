@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,7 +9,7 @@ namespace IMEdge\RrdGraph\Rpn;
  */
 class Rad2Deg extends ArithmeticOperator
 {
-    const NAME = 'RAD2DEG';
+    public const NAME = 'RAD2DEG';
 
     protected ?int $parameterCount = 1;
 }

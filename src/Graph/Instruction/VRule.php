@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -23,5 +25,5 @@ namespace IMEdge\RrdGraph\Graph\Instruction;
  */
 class VRule extends HRule
 {
-    const TAG = 'VRULE';
+    public const TAG = 'VRULE';
 }

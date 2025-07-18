@@ -1,13 +1,17 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\DataType;
 
 use InvalidArgumentException;
+
 use function preg_match;
 
 class IntegerType implements DataTypeInterface
 {
-    const REGEXP = '/^-?\d+$/';
+    protected const REGEXP = '/^-?\d+$/';
+
     protected int $value;
 
     public function __construct(int $value)

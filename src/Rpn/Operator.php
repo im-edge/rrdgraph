@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
@@ -7,7 +9,7 @@ abstract class Operator
     /**
      * Needs to be set by each operator class
      */
-    const NAME = 'INVALID_OPERATOR';
+    public const NAME = 'INVALID_OPERATOR';
 
     // Not sure about this:
     // /** @var string Nice name */
@@ -38,8 +40,12 @@ abstract class Operator
      */
     protected bool $variadicCountIsFirst = false;
 
-    public function getParameterCount(): ?int
+    public function getParameterCount(): int
     {
+        if ($this->parameterCount === null) {
+            throw new \RuntimeException(get_class($this) . ' has no parameterCount');
+        }
+
         return $this->parameterCount;
     }
 

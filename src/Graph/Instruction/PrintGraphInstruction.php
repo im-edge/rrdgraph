@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Graph\Instruction;
 
@@ -31,7 +33,7 @@ use IMEdge\RrdGraph\DataType\StringType;
  */
 class PrintGraphInstruction implements GraphInstructionInterface, InstructionWithVariableInterface
 {
-    const TAG = 'PRINT';
+    public const TAG = 'PRINT';
 
     protected VariableName $variableName;
     protected StringType $format;
@@ -51,7 +53,7 @@ class PrintGraphInstruction implements GraphInstructionInterface, InstructionWit
         return $this->variableName;
     }
 
-    public function renameVariable(string $oldName, string $newName)
+    public function renameVariable(string $oldName, string $newName): void
     {
         if ($this->variableName->getName() === $oldName) {
             $this->variableName->setName($newName);
@@ -113,8 +115,8 @@ class PrintGraphInstruction implements GraphInstructionInterface, InstructionWit
     {
         // TODO: Set optional flags. We need a better abstraction for this
         return new static(
-            new VariableName(array_shift($parameters)),
-            StringType::parse(array_shift($parameters))
+            new VariableName(array_shift($parameters) ?? ''),
+            StringType::parse(array_shift($parameters) ?? '')
         );
     }
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Data;
 
@@ -11,10 +13,10 @@ use RuntimeException;
 
 class Assignment
 {
-    const TAG_DATA_DEFINITION = 'DEF';
-    const TAG_DATA_CALCULATION = 'CDEF';
-    const TAG_VARIABLE_DEFINITION = 'VDEF';
-    const ALLOWED_TAGS = [
+    public const TAG_DATA_DEFINITION = 'DEF';
+    public const TAG_DATA_CALCULATION = 'CDEF';
+    public const TAG_VARIABLE_DEFINITION = 'VDEF';
+    public const ALLOWED_TAGS = [
         self::TAG_DATA_DEFINITION,
         self::TAG_DATA_CALCULATION,
         self::TAG_VARIABLE_DEFINITION,
@@ -44,12 +46,12 @@ class Assignment
     }
 
     /**
-     * @param array<int, mixed> $assignment
+     * @param array<int, string> $assignment
      */
     public static function fromAssignment(string $tag, array $assignment): Assignment
     {
         static::assertValidTag($tag);
-        $parts = ParseUtils::splitKeyValue(array_shift($assignment), '=');
+        $parts = ParseUtils::splitKeyValue((string) array_shift($assignment), '=');
         array_unshift($assignment, $parts[1]);
         $varName = new VariableName(StringType::parse($parts[0])->getRawString());
         if ($tag === self::TAG_DATA_DEFINITION) {

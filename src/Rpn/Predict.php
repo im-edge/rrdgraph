@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace IMEdge\RrdGraph\Rpn;
 
 class Predict extends SetOperator
 {
-    const NAME = 'PREDICT';
+    public const NAME = 'PREDICT';
     protected ?int $parameterCount = 2;
 }
