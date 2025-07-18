@@ -48,7 +48,7 @@ final class Render
 
     /**
      * @param string $parameter
-     * @param \Stringable|string|null $value
+     * @param \Stringable|DataTypeInterface|string|null $value
      * @return string
      */
     public static function optionalNamedParameter(string $parameter, $value): string
