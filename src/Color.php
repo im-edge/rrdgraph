@@ -74,7 +74,7 @@ class Color
         }
 
         return sprintf(
-            'rgba(%d, %d, %d, %.3f)',
+            'rgba(%d, %d, %d, %.3F)',
             hexdec(substr($this->hexCode, 0, 2)),
             hexdec(substr($this->hexCode, 2, 2)),
             hexdec(substr($this->hexCode, 4, 2)),
